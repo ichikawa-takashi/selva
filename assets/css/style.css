@@ -287,9 +287,15 @@ html.is-kv-in .kv__image::after { opacity: 0; }
    ========================================================= */
 .numgrid { display: grid; gap: clamp(14px, 1.4vw, 22px); margin-top: var(--space-head); }
 .numgrid.-top { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "a b c" "d d d"; }
-.numgrid.-benefit { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "a b" "a c"; }
 .numtile { position: relative; display: flex; flex-direction: column; min-height: clamp(260px, 22vw, 330px); padding-top: clamp(16px, 1.6vw, 24px); padding-left: clamp(16px, 1.6vw, 24px); padding-right: clamp(16px, 1.6vw, 24px); padding-bottom: clamp(18px, 1.6vw, 24px); border-radius: var(--radius-s); background: var(--color-white); }
 .numtile.-a { grid-area: a; } .numtile.-b { grid-area: b; } .numtile.-c { grid-area: c; } .numtile.-d { grid-area: d; min-height: 0; }
+/* ラベル・数字・説明文を左にまとめ、アイコンを右で上下中央に置く */
+.numtile:not(.-d) { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr; column-gap: 16px; min-height: 0; padding-top: clamp(20px, 1.9vw, 28px); padding-left: clamp(20px, 1.9vw, 28px); padding-right: clamp(20px, 1.9vw, 28px); padding-bottom: clamp(22px, 2vw, 30px); }
+.numtile:not(.-d) .numtile__label { grid-column: 1; grid-row: 1; justify-self: start; }
+.numtile:not(.-d) .numtile__body { display: contents; }
+.numtile:not(.-d) .numtile__value { grid-column: 1; grid-row: 2; margin-top: clamp(22px, 2.2vw, 34px); }
+.numtile:not(.-d) .numtile__ill { grid-column: 2; grid-row: 1 / 4; align-self: center; width: clamp(72px, 7.2vw, 108px); }
+.numtile:not(.-d) .numtile__desc { grid-column: 1 / -1; grid-row: 3; margin-top: 14px; }
 .numtile__label { display: inline-block; align-self: flex-start; padding-top: 3px; padding-bottom: 4px; padding-left: 10px; padding-right: 10px; border-radius: 3px; background: var(--color-sky-700); color: var(--text-inverse); font-weight: 700; font-size: clamp(13px, 1vw, 15px); line-height: 1.5; letter-spacing: .05em; }
 .numtile__body { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; }
 .numtile__value { display: flex; align-items: baseline; white-space: nowrap; color: var(--color-accent); }
@@ -301,10 +307,6 @@ html.is-kv-in .kv__image::after { opacity: 0; }
 .numtile__stat { display: flex; flex-direction: column; gap: 18px; padding-left: 20px; border-left: 1px solid var(--color-line); }
 .numtile__stat:first-child { padding-left: 0; border-left: 0; }
 .numtile__stats .numtile__num { font-size: clamp(34px, 3.2vw, 50px); }
-/* 成果：左のタイルを縦長にし、数字を大きく */
-.numgrid.-benefit .numtile.-a .numtile__body { flex-direction: column; align-items: flex-start; justify-content: center; gap: 28px; }
-.numgrid.-benefit .numtile.-a .numtile__num { font-size: clamp(64px, 7.4vw, 112px); }
-.numgrid.-benefit .numtile.-a .numtile__ill { width: clamp(140px, 15vw, 220px); align-self: flex-end; }
 @media (max-width: 1023px) {
   .numgrid.-top { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "a a" "b c" "d d"; }
   .numtile__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -312,7 +314,6 @@ html.is-kv-in .kv__image::after { opacity: 0; }
 }
 @media (max-width: 767px) {
   .numgrid.-top { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c" "d"; }
-  .numgrid.-benefit { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c"; }
   .numtile { min-height: 0; }
 }
 

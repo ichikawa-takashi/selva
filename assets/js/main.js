@@ -138,15 +138,27 @@
     const slides = stack.querySelectorAll('.stack__slide');
     const cur = stack.querySelector('.stack__current');
     const fill = stack.querySelector('.stack__bar-fill');
-    const stackIo = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        const n = Number(e.target.dataset.index);
-        cur.textContent = `(0${n})`;
-        fill.style.height = `${(n / slides.length) * 100}%`;
+    // sticky で重なるため、上に戻っても下のスライドは中央線にかかったまま。
+    // IntersectionObserver では戻りを検知できないので、スクロールごとに上端の位置で判定する
+    let currentIndex = 0;
+    let ticking = false;
+    const updateStack = () => {
+      ticking = false;
+      const center = window.innerHeight / 2;
+      let n = 1;
+      slides.forEach((s) => {
+        if (s.getBoundingClientRect().top <= center) n = Number(s.dataset.index);
       });
-    }, { rootMargin: '-50% 0px -50% 0px' });
-    slides.forEach((s) => stackIo.observe(s));
+      if (n === currentIndex) return;
+      currentIndex = n;
+      cur.textContent = `(0${n})`;
+      fill.style.height = `${(n / slides.length) * 100}%`;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(updateStack); }
+    }, { passive: true });
+    window.addEventListener('resize', updateStack);
+    updateStack();
   }
 
   /* ---------- 5つの理由：左を固定し、右のリストをスクロール量に合わせて動かす（Zoff） ---------- */
