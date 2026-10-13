@@ -729,3 +729,5 @@ html.is-kv-in .kv__image::after { opacity: 0; }
 .reasons__kv > .img-fill { position: absolute; inset: 0; }
 .numtile__ill .img-fill { border-radius: 0; }
 .step__img .img-fill { background: var(--color-white); }
+.pain__ill { overflow: hidden; border-radius: 50%; background: var(--color-white); box-shadow: 0 16px 40px rgba(31, 49, 64, .06); }
+.pain__ill .img-fill { padding: 9%; }
