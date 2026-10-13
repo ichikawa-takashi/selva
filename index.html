@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ja" class="is-loading">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人材紹介会社向け｜求人ポータルサイト構築｜株式会社セルバ</title>
+<meta name="description" content="媒体費 −40%、応募数 ×2.5倍を実現する、人材紹介会社専用の求人ポータルサイト構築。Indeed・媒体依存から脱却し、自社の求職者DB／スカウト／会員化／LINE連携で長期的な集客資産を作る。">
+<script>
+  // オープニング中のチラ見え防止。JSが止まっても6秒で必ず表示する
+  document.documentElement.classList.add('js');
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.__loadingFallback = setTimeout(function () { document.documentElement.classList.remove('is-loading'); }, 6000);
+</script>
+<style>
+  html.is-loading body > *:not(#splash):not(.bgfx) { visibility: hidden; }
+  html.is-loading, html.is-loading body { overflow: hidden; }
+  #splash { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding-left: 20px; padding-right: 20px; transition: opacity .8s ease, visibility .8s ease; }
+  html:not(.is-loading) #splash { opacity: 0; visibility: hidden; pointer-events: none; }
+  .splash__copy { margin: 0; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; font-weight: 400; font-size: clamp(36px, 5.4vw, 78px); line-height: 1.25; letter-spacing: .06em; color: #6EC6EA; clip-path: inset(0 100% 0 0); -webkit-clip-path: inset(0 100% 0 0); transition: clip-path 1.1s ease, -webkit-clip-path 1.1s ease, color 1.1s ease; }
+  html.is-splash-play .splash__copy { clip-path: inset(0 0 0 0); -webkit-clip-path: inset(0 0 0 0); color: #2A8F9C; }
+  html { background: #E8F4F1; }
+</style>
+<noscript><style>html.is-loading body > * { visibility: visible !important; } html.is-loading, html.is-loading body { overflow: visible !important; } #splash { display: none !important; }</style></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zalando+Sans+SemiExpanded:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          sky: { 700: '#1A78AE', 500: '#6EC6EA', 300: '#B9E3F4', 100: '#D6EFF8' },
+          base: '#E8F4F1',
+          line: '#CBDDDF',
+          ink: { DEFAULT: '#1F3140', sub: '#4A5F6E' },
+          accent: { DEFAULT: '#2A8F9C', light: '#7FD9D2' },
+          cream: '#F4F0DC'
+        },
+        fontFamily: {
+          ja: ['"Noto Sans JP"', '"Hiragino Sans"', 'sans-serif'],
+          en: ['"Zalando Sans SemiExpanded"', '"Noto Sans JP"', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-ja text-ink">
+
+<!-- オープニング -->
+<div id="splash" aria-hidden="true">
+  <p class="splash__copy">利益につなげる。<br>未来につながる。</p>
+</div>
+
+<!-- 背景の四角（EMS 由来：スクロール速度に遅れてついてくる） -->
+<div class="bgfx" aria-hidden="true">
+  <div class="bgfx__box">
+    <div class="bgfx__obj -o1"></div>
+    <div class="bgfx__obj -o2"></div>
+    <div class="bgfx__obj -o3"></div>
+    <div class="bgfx__obj -o4"></div>
+    <div class="bgfx__obj -o5"></div>
+    <div class="bgfx__obj -o6"></div>
+    <div class="bgfx__obj -o7"></div>
+    <div class="bgfx__obj -o8"></div>
+  </div>
+  <div class="bgfx__veil"></div>
+</div>
+
+<!-- ヘッダー -->
+<header class="header">
+  <div class="header__logo tab -tl">
+    <a href="#top" class="header__logo-link">
+      <img src="assets/img/logo.svg" alt="株式会社セルバ" width="158" height="40">
+    </a>
+    <p class="header__site">人材紹介会社向け｜求人ポータルサイト構築</p>
+  </div>
+  <div class="header__actions tab -tr">
+    <a href="tel:0358431958" class="header__btn -tel">
+      <span class="header__btn-label">TEL</span>
+      <span class="header__btn-text">03-5843-1958</span>
+    </a>
+    <a href="#contact" class="header__btn -cta">
+      <span class="header__btn-text">無料で集客診断</span>
+    </a>
+  </div>
+</header>
+
+<main id="top" class="main">
+
+  <!-- KV -->
+  <section class="kv" aria-label="メインビジュアル">
+    <div class="kv__image">
+      <div class="kv__slides">
+        <div class="kv__slide is-active"><img class="img-fill " src="assets/img/kv-01.webp" alt="" decoding="async"></div>
+        <div class="kv__slide"><img class="img-fill " src="assets/img/kv-02.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="kv__slide"><img class="img-fill " src="assets/img/kv-03.webp" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <p class="kv__notice"><span class="kv__notice-label">LIMITED</span><span>今月、人材紹介会社さま先着7社限定で媒体費削減シミュレーション資料を無料作成しています</span></p>
+      <div class="kv__copy">
+        <p class="kv__label">人材紹介会社向け｜求人ポータルサイト構築</p>
+        <h1 class="kv__title">媒体費 −40%、<br>応募数 ×2.5倍を実現する、<br>人材紹介会社専用の<br>求人ポータルサイト構築。</h1>
+      </div>
+      <div class="kv__steps" aria-hidden="true">
+        <span class="kv__step -s1"></span>
+        <span class="kv__step -s2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- リード（EMS About の2カラム） -->
+  <section class="section intro" aria-label="サービス概要">
+    <div class="wrap">
+      <div class="intro__grid">
+        <p class="intro__lead js-fade">Indeed・媒体依存から脱却し、自社の求職者DB／スカウト／会員化／LINE連携で長期的な集客資産を作る。</p>
+        <div class="intro__body js-fade">
+          <p class="intro__text">中小〜中堅の人材紹介会社・専門職特化の紹介会社の採用ROI改善に、創業20年・支援120社の知見で伴走します。</p>
+          <div class="intro__cta">
+            <a href="#contact" class="btn">
+              <span class="btn__text">媒体費削減シミュレーションを無料で作成<small>30秒の入力で診断資料を返信／先着10社限定</small></span>
+              <span class="btn__icon" aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="intro__reason">
+            <p class="intro__reason-title">セルバが選ばれる理由</p>
+            <ul class="intro__checks">
+              <li>しつこい営業はいたしません</li>
+              <li>検討段階の相談OK</li>
+              <li>1営業日以内にご返信</li>
+            </ul>
+            <ul class="chips">
+              <li class="chip">支援実績120社以上</li>
+              <li class="chip">会員30万人規模の運用実績</li>
+              <li class="chip">創業2003年</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip js-strip">
+      <div class="strip__track">
+        <div class="strip__item -a"><img class="img-fill " src="assets/img/strip-01.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="strip__item -b"><img class="img-fill " src="assets/img/strip-02.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="strip__item -c"><img class="img-fill " src="assets/img/strip-03.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="strip__item -b"><img class="img-fill " src="assets/img/strip-04.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="strip__item -a"><img class="img-fill " src="assets/img/strip-05.webp" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <button type="button" class="strip__toggle is-playing" aria-label="スライダーを停止"></button>
+    </div>
+  </section>
+
+  <!-- 3つの数字（Zoff 数字で見る私たち） -->
+  <section class="section numbers" aria-labelledby="numbers-title">
+    <div class="wrap">
+      <div class="head js-fade">
+        <h2 id="numbers-title" class="head__title">セルバ導入で変わる、<br class="sp-br">3つの数字</h2>
+      </div>
+      <div class="numgrid -top js-fade -delay">
+        <article class="numtile -a">
+          <span class="numtile__label">媒体広告費</span>
+          <div class="numtile__body">
+            <p class="numtile__value"><span class="numtile__num">−40</span><span class="numtile__unit">%</span></p>
+            <div class="numtile__ill"><img class="img-fill -contain" src="assets/img/icon-cost.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <p class="numtile__desc">SEO・スカウト経由の応募が増え、媒体予算を圧縮</p>
+        </article>
+        <article class="numtile -b">
+          <span class="numtile__label">自社経由の応募比率</span>
+          <div class="numtile__body">
+            <p class="numtile__value"><span class="numtile__num">×2.5</span><span class="numtile__unit">倍</span></p>
+            <div class="numtile__ill"><img class="img-fill -contain" src="assets/img/icon-growth.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <p class="numtile__desc">媒体経由から自社流入比率へ大きくシフト</p>
+        </article>
+        <article class="numtile -c">
+          <span class="numtile__label">3年で蓄積する会員DB</span>
+          <div class="numtile__body">
+            <p class="numtile__value"><span class="numtile__num">10,000</span><span class="numtile__unit">名</span></p>
+            <div class="numtile__ill"><img class="img-fill -contain" src="assets/img/icon-members.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <p class="numtile__desc">人材紹介事業の長期的な競争資産になる</p>
+        </article>
+        <article class="numtile -d">
+          <div class="numtile__stats">
+            <div class="numtile__stat"><span class="numtile__label">支援実績</span><p class="numtile__value"><span class="numtile__num">120</span><span class="numtile__unit">社+</span></p></div>
+            <div class="numtile__stat"><span class="numtile__label">最大運用規模</span><p class="numtile__value"><span class="numtile__num">30</span><span class="numtile__unit">万人</span></p></div>
+            <div class="numtile__stat"><span class="numtile__label">最大月商</span><p class="numtile__value"><span class="numtile__num">9</span><span class="numtile__unit">億円</span></p></div>
+            <div class="numtile__stat"><span class="numtile__label">創業</span><p class="numtile__value"><span class="numtile__num">2003</span><span class="numtile__unit">年</span></p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- こんなお悩み（添付イメージ：イラストの周りにテキスト） -->
+  <section class="section pain" aria-labelledby="pain-title">
+    <div class="wrap">
+      <div class="head -center js-fade">
+        <p class="head__en">PAIN POINTS</p>
+        <h2 id="pain-title" class="head__title">こんなお悩み、ありませんか？</h2>
+        <p class="head__desc">人材紹介会社の集客・送客環境は、ここ数年で大きく変わりました。<br>媒体だけで戦い続けるのが、もう難しくなっています。</p>
+      </div>
+      <div class="pain__stage">
+        <div class="pain__ill js-fade"><div class="ph -ill -round" data-label="ILLUST 04 / 1:1"></div></div>
+        <ul class="pain__list">
+          <li class="pain__item -l1 js-fade">媒体への広告費が年々上がり、紹介利益を圧迫している</li>
+          <li class="pain__item -l2 js-fade">求職者と直接つながる導線がなく、毎回ゼロから集めている</li>
+          <li class="pain__item -l3 js-fade">専門職特化で勝負したいのに、母集団形成が頭打ち</li>
+          <li class="pain__item -l4 js-fade">スカウトメール返信率が落ち続け、開封すら取れない</li>
+          <li class="pain__item -r1 js-fade">Indeedのアルゴリズム変動で、月の応募数が読めない</li>
+          <li class="pain__item -r2 js-fade">求職者情報が営業担当ごとに属人化し、活用できていない</li>
+          <li class="pain__item -r3 js-fade">過去の求職者データを新着求人にマッチさせて再訴求できていない</li>
+          <li class="pain__item -r4 js-fade">面談調整・選考連絡のメール往復で、紹介担当の時間が消えている</li>
+        </ul>
+      </div>
+      <div class="pain__arrow" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- 中間CTA 1（EMS 下部CTAパネル） -->
+  <section class="section -tight" aria-label="無料診断のご案内">
+    <div class="wrap">
+      <div class="ctapanel js-fade">
+        <div class="ctapanel__text">
+          <p class="head__en">FOR YOUR CHALLENGE</p>
+          <h2 class="ctapanel__title">1つでも当てはまる方へ。<br>御社の集客構造を、無料で診断します。</h2>
+          <p class="ctapanel__desc">媒体費・自社流入比率・スカウト効果の現状を可視化し、改善余地を明文化したレポートをお返しします。営業電話はいたしません。</p>
+        </div>
+        <div class="ctapanel__action">
+          <a href="#contact" class="btn -lg">
+            <span class="btn__text">集客構造を無料で診断する<small>所要30秒・1営業日以内に返信</small></span>
+            <span class="btn__icon" aria-hidden="true"></span>
+          </a>
+          <p class="ctapanel__note">※ 検討段階の相談OK／資料だけのご請求も歓迎</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 市場の構造変化（山龢セカンドビュー：上に重なっていくスライド） -->
+  <section class="section market" aria-labelledby="market-title">
+    <div class="wrap">
+      <div class="head js-fade">
+        <p class="head__en">MARKET CONTEXT</p>
+        <h2 id="market-title" class="head__title">いま、人材紹介市場で<br>起こっている構造変化</h2>
+        <p class="head__desc">「自社で求職者DBを持つ仕組み」が必要なのは、業界の構造変化に裏付けがあります。<br>媒体に依存し続けることのリスクが、ここ数年で大きくなっています。</p>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="stack__progress" aria-hidden="true">
+        <span class="stack__current">(01)</span>
+        <span class="stack__bar"><span class="stack__bar-fill"></span></span>
+        <span>(03)</span>
+      </div>
+      <article class="stack__slide" data-index="1">
+        <div class="stack__half -num">
+          <img class="img-fill " src="assets/img/market-01.webp" alt="" loading="lazy" decoding="async">
+          <div class="stack__num-wrap">
+            <p class="stack__label">CHANGE 01</p>
+            <p class="stack__num">×1.7倍</p>
+          </div>
+        </div>
+        <div class="stack__half -text -c1">
+          <div class="stack__text">
+            <h3 class="stack__title">求人媒体の掲載単価が<br>3年で約1.7倍に高騰</h3>
+            <p>求職者数の頭打ちと媒体間競争が激化し、Indeed・求人ボックス・各種転職媒体ともに掲載・スポンサー単価が継続的に上昇。媒体運用だけで採用利益を確保することは年々難しくなっています。</p>
+          </div>
+        </div>
+      </article>
+      <article class="stack__slide" data-index="2">
+        <div class="stack__half -num">
+          <img class="img-fill " src="assets/img/market-02.webp" alt="" loading="lazy" decoding="async">
+          <div class="stack__num-wrap">
+            <p class="stack__label">CHANGE 02</p>
+            <p class="stack__num">2-3回/年</p>
+          </div>
+        </div>
+        <div class="stack__half -text -c2">
+          <div class="stack__text">
+            <h3 class="stack__title">Indeedのアルゴリズム変動で<br>集客が継続的に不安定化</h3>
+            <p>大規模仕様変更・スポンサー比率の調整・有料連携の方針変更が短い周期で発生。媒体トラフィック頼みの紹介会社ほど、月次の応募数・面談数が読めなくなる構造に陥っています。</p>
+          </div>
+        </div>
+      </article>
+      <article class="stack__slide" data-index="3">
+        <div class="stack__half -num">
+          <img class="img-fill  -market03" src="assets/img/market-03.webp" alt="" loading="lazy" decoding="async">
+          <div class="stack__num-wrap">
+            <p class="stack__label">CHANGE 03</p>
+            <p class="stack__num">80%+</p>
+          </div>
+        </div>
+        <div class="stack__half -text -c3">
+          <div class="stack__text">
+            <h3 class="stack__title">求職者の8割以上が<br>複数媒体・サイトを併用</h3>
+            <p>求職者の情報収集行動が多チャネル化し、媒体掲載のみでは認知も囲い込みもできない時代に。自社サイト・自社会員DBを持たない事業者は、機会損失が継続的に拡大していきます。</p>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="wrap">
+      <div class="market__conclusion js-fade">
+        <p class="market__lead">だからこそ、「自社で求職者DBを蓄積し、媒体に依存しないチャネルを持つ」ことが、これからの人材紹介事業の競争力の源泉になります。</p>
+        <p class="market__text">求人ポータルサイト構築は、媒体費の削減策ではなく、事業構造そのものを長期で守るための投資です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ソリューション Before/After（EMS 事業セクション：水色の面＋切り欠きパネル） -->
+  <section class="section solution" data-bg="sky" aria-labelledby="solution-title">
+    <div class="wrap">
+      <div class="head js-fade">
+        <p class="head__en">OUR SOLUTION</p>
+        <h2 id="solution-title" class="head__title">そのお悩み、<br>「自社求人ポータル」が解決します。</h2>
+        <p class="head__desc">媒体に広告費を払い続けるのではなく、自社で求職者DBを持ち、検索流入とスカウトで集客する仕組みに切り替えることで、利益構造そのものが変わります。</p>
+      </div>
+      <div class="ba">
+        <article class="ba__card -before js-fade">
+          <div class="ba__img"><img class="img-fill " src="assets/img/before.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="ba__body">
+            <p class="ba__label">BEFORE｜従来の集客</p>
+            <h3 class="ba__title">媒体に依存し<br>毎月コストを払い続ける構造</h3>
+            <ul class="ba__list">
+              <li>掲載費が上がっても止められない</li>
+              <li>求職者DBが媒体側に蓄積される</li>
+              <li>Indeedの仕様変更に振り回される</li>
+              <li>紹介担当の架電工数が増え続ける</li>
+            </ul>
+          </div>
+        </article>
+        <div class="ba__arrow" aria-hidden="true"></div>
+        <article class="ba__card -after js-fade">
+          <div class="ba__body">
+            <p class="ba__label">AFTER｜セルバの導入後</p>
+            <h3 class="ba__title">自社DBが資産化し<br>集客コストが下がっていく</h3>
+            <ul class="ba__list">
+              <li>SEOで自社サイトに無料流入が増える</li>
+              <li>会員DBが3年で1万人規模に</li>
+              <li>スカウト・LINEで返信率が改善</li>
+              <li>応募管理が自動化し、対応工数が減る</li>
+            </ul>
+          </div>
+          <div class="ba__img"><img class="img-fill " src="assets/img/after.webp" alt="" loading="lazy" decoding="async"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 中間CTA 2 -->
+  <section class="section -tight" aria-label="シミュレーションのご案内">
+    <div class="wrap">
+      <div class="ctapanel js-fade">
+        <div class="ctapanel__text">
+          <p class="head__en">SIMULATION</p>
+          <h2 class="ctapanel__title">御社の数字で、<br>媒体費削減シミュレーションを作成します。</h2>
+          <p class="ctapanel__desc">現在の媒体費・応募数・成約率をお伺いし、自社サイト導入後3年間のROI改善イメージを試算した資料をお返しします。秘密保持契約締結も可能です。</p>
+        </div>
+        <div class="ctapanel__action">
+          <a href="#contact" class="btn -lg">
+            <span class="btn__text">媒体費削減シミュレーションを依頼<small>無料・1営業日以内に返信</small></span>
+            <span class="btn__icon" aria-hidden="true"></span>
+          </a>
+          <p class="ctapanel__note">※ 営業ではなく、純粋な現状診断としてお使いいただけます</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3つの特徴（TimeRex 機能紹介：画像の後ろにずらした面） -->
+  <section class="section features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="head -center js-fade">
+        <p class="head__en">FEATURES</p>
+        <h2 id="features-title" class="head__title">セルバの求人ポータル<br>3つの特徴</h2>
+        <p class="head__desc">単なるサイト制作ではなく、人材紹介ビジネスの利益を変えるための機能設計を行います。</p>
+      </div>
+      <div class="feature js-fade">
+        <div class="feature__text">
+          <p class="feature__label">FEATURE 01</p>
+          <h3 class="feature__title">業界特化SEO設計で<br>自然検索流入を獲得</h3>
+          <p class="feature__desc">「職種 × エリア × 雇用形態 × 条件」で自動的にSEOページを大量生成。求職者が検索する具体ワードを面で押さえ、媒体に頼らず月数千〜数万単位の自然流入を獲得する設計を行います。</p>
+        </div>
+        <div class="feature__visual"><div class="feature__img"><img class="img-fill " src="assets/img/feature-01.webp" alt="" loading="lazy" decoding="async"></div></div>
+      </div>
+      <div class="feature -rev js-fade">
+        <div class="feature__text">
+          <p class="feature__label">FEATURE 02</p>
+          <h3 class="feature__title">会員化＆スカウト機能で<br>求職者DBを資産化</h3>
+          <p class="feature__desc">離脱しがちな匿名訪問者を、会員登録・LINE連携で識別。希望条件に合う求人を自動配信し、長期的に追客できる仕組みに。年単位で蓄積するDBが、御社の最大の競争資産になります。</p>
+        </div>
+        <div class="feature__visual"><div class="feature__img"><img class="img-fill " src="assets/img/feature-02.webp" alt="" loading="lazy" decoding="async"></div></div>
+      </div>
+      <div class="feature js-fade">
+        <div class="feature__text">
+          <p class="feature__label">FEATURE 03</p>
+          <h3 class="feature__title">応募管理の自動化で<br>紹介担当の工数を半減</h3>
+          <p class="feature__desc">応募〜面談調整〜稼働までのステータス管理、メール・LINE自動送信、担当割振りまで一元化。エージェントが「人と話すこと」に集中できる体制を作ります。</p>
+        </div>
+        <div class="feature__visual"><div class="feature__img"><img class="img-fill " src="assets/img/feature-03.webp" alt="" loading="lazy" decoding="async"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 機能一覧（TimeRex 拡張機能カード） -->
+  <section class="section funcs" data-bg="blur" aria-labelledby="funcs-title">
+    <div class="wrap">
+      <div class="head -center js-fade">
+        <p class="head__en">FUNCTION LIST</p>
+        <h2 id="funcs-title" class="head__title">セルバが提供する<br>求人ポータルの機能一覧</h2>
+        <p class="head__desc">求職者・紹介担当者・運営管理それぞれの動線で必要な機能を、標準パッケージ＋オプションで網羅。<br>御社の運用フローに合わせて、必要な範囲を組み合わせます。</p>
+      </div>
+      <div class="funcs__grid">
+        <article class="funccard js-fade">
+          <div class="funccard__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg>
+          </div>
+          <h3 class="funccard__title">求職者向け機能<span>FOR JOB SEEKERS</span></h3>
+          <ul class="funccard__list">
+            <li>求人検索（職種×エリア×条件×給与）</li>
+            <li>条件保存・新着通知でリピート訪問促進</li>
+            <li>会員登録／LINE連携で離脱者を再獲得</li>
+            <li>スカウト受信と希望条件の双方向マッチング</li>
+            <li>お気に入り・比較リストで検討の可視化</li>
+            <li>応募完了フローの最短化（3ステップ以内）</li>
+            <li>マイページで応募状況・面談予定を一元管理</li>
+          </ul>
+        </article>
+        <article class="funccard js-fade">
+          <div class="funccard__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="4.5" width="17" height="13" rx="2"/><path d="M8 20.5h8M7.5 13.5v-3M12 13.5v-5M16.5 13.5v-2"/></svg>
+          </div>
+          <h3 class="funccard__title">紹介担当者向け機能<span>FOR AGENTS</span></h3>
+          <ul class="funccard__list">
+            <li>求人投稿・一括CSV登録で運用負担を削減</li>
+            <li>応募管理ダッシュボード（ステータス・担当割振り）</li>
+            <li>面談・選考ステータス管理と進捗共有</li>
+            <li>スカウトメール送信＆テンプレート管理</li>
+            <li>自動メール／LINE配信（お礼・リマインド）</li>
+            <li>分析ダッシュボード（流入・応募・成約率）</li>
+            <li>アクセス権限管理（拠点別・職種別の運用）</li>
+          </ul>
+        </article>
+        <article class="funccard js-fade">
+          <div class="funccard__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M7.5 7h.01M7.5 17h.01"/></svg>
+          </div>
+          <h3 class="funccard__title">システム横断機能<span>SYSTEM &amp; INFRA</span></h3>
+          <ul class="funccard__list">
+            <li>SEO構造設計（職種×エリア自動ページ生成）</li>
+            <li>サイトマップ自動生成とインデックス最適化</li>
+            <li>スマホ最適化＆Core Web Vitals対応</li>
+            <li>セキュリティ対応（SSL／IP制限／DDoS耐性）</li>
+            <li>外部連携API（既存CRM／MA／会計）</li>
+            <li>多言語対応（英・中・ベトナム語など／オプション）</li>
+            <li>AWS等クラウド基盤での運用設計＆監視</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 導入で期待できる成果（Zoff 数字で見る私たち） -->
+  <section class="section benefits" aria-labelledby="benefits-title">
+    <div class="wrap">
+      <div class="head js-fade">
+        <p class="head__en">BENEFITS</p>
+        <h2 id="benefits-title" class="head__title">導入で期待できる成果</h2>
+        <p class="head__desc">セルバのポータル開発実績から、人材紹介事業者で多く見られる改善イメージです。</p>
+      </div>
+      <div class="numgrid -benefit js-fade -delay">
+        <article class="numtile -a">
+          <span class="numtile__label">媒体広告費の削減</span>
+          <div class="numtile__body">
+            <p class="numtile__value"><span class="numtile__num">−40</span><span class="numtile__unit">%</span></p>
+            <div class="numtile__ill"><img class="img-fill -contain" src="assets/img/icon-cost.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <p class="numtile__desc">SEO・スカウト経由の応募が増えることで、媒体予算を継続的に圧縮できます。</p>
+        </article>
+        <article class="numtile -b">
+          <span class="numtile__label">自社経由の応募比率</span>
+          <div class="numtile__body">
+            <p class="numtile__value"><span class="numtile__num">×2.5</span></p>
+            <div class="numtile__ill"><img class="img-fill -contain" src="assets/img/icon-growth.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <p class="numtile__desc">媒体経由から自社流入比率へシフト。利益率の高い応募が増えていきます。</p>
+        </article>
+        <article class="numtile -c">
+          <span class="numtile__label">3年で蓄積する会員DB</span>
+          <div class="numtile__body">
+            <p class="numtile__value"><span class="numtile__num">10,000</span><span class="numtile__unit">名</span></p>
+            <div class="numtile__ill"><img class="img-fill -contain" src="assets/img/icon-members.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <p class="numtile__desc">将来の母集団となる求職者データが、紹介事業の長期的な資産になります。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- モデルケース（TimeRex 導入事例） -->
+  <section class="section cases" aria-labelledby="cases-title">
+    <div class="wrap">
+      <div class="head -center js-fade">
+        <p class="head__en">MODEL CASES</p>
+        <h2 id="cases-title" class="head__title">想定モデルケース</h2>
+        <p class="head__desc">同業種・近接領域での開発実績から、人材紹介会社における代表的な成果イメージをご紹介します。</p>
+      </div>
+      <article class="case js-fade">
+        <div class="case__img"><img class="img-fill " src="assets/img/case-01.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="case__panel">
+          <p class="case__tag">CASE 01｜中堅IT人材紹介</p>
+          <h3 class="case__title">「Indeed依存からの脱却」<span>媒体費を6割削減した中堅IT紹介A社</span></h3>
+          <p class="case__scale">想定規模：紹介担当15名／媒体費 月200万円規模</p>
+          <div class="case__metrics">
+            <div class="case__metric"><span>媒体広告費</span><strong>200万→80万<small>/月</small></strong></div>
+            <div class="case__metric"><span>自社経由応募比率</span><strong>15%→55%</strong></div>
+          </div>
+          <p class="case__desc">エンジニア職種別×リモート可否×単価レンジでSEOページを自動生成し、技術ブログを内製化。スカウト機能との組み合わせで、媒体経由の応募を自社流入に置き換えていく構成。</p>
+        </div>
+      </article>
+      <article class="case -rev js-fade">
+        <div class="case__img"><img class="img-fill " src="assets/img/case-02.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="case__panel">
+          <p class="case__tag">CASE 02｜専門職特化</p>
+          <h3 class="case__title">「会員8,000名・スカウト返信率2倍」<span>士業転職特化のB社</span></h3>
+          <p class="case__scale">想定規模：紹介担当8名／専門職特化型</p>
+          <div class="case__metrics">
+            <div class="case__metric"><span>3年累計会員数</span><strong>0→8,000名</strong></div>
+            <div class="case__metric"><span>スカウト返信率</span><strong>3%→6.2%</strong></div>
+          </div>
+          <p class="case__desc">資格別・経験年数別の細かい属性データを取り、ターゲティング精度を大幅に向上。LINE連携によるリマインドで離脱を防ぎ、長期的な紹介機会を獲得できる構成に。</p>
+        </div>
+      </article>
+      <article class="case js-fade">
+        <div class="case__img"><img class="img-fill " src="assets/img/case-03.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="case__panel">
+          <p class="case__tag">CASE 03｜地方拠点</p>
+          <h3 class="case__title">「地方×職種SEOで月500件の応募流入」<span>地方ハイクラス紹介C社</span></h3>
+          <p class="case__scale">想定規模：拠点3／地方ハイクラス領域</p>
+          <div class="case__metrics">
+            <div class="case__metric"><span>月間応募数</span><strong>80→500件</strong></div>
+            <div class="case__metric"><span>求人媒体費</span><strong>−65%</strong></div>
+          </div>
+          <p class="case__desc">都道府県×職種×年収帯のロングテールSEOを徹底。Uターン・Iターン層向けの記事コンテンツ、地域企業情報DBを併設することで、媒体掲載のないエリアでも応募が集まる仕組みに。</p>
+        </div>
+      </article>
+      <p class="cases__note">※上記は近接領域の支援実績をもとにしたモデルケースです。実数値はクライアントごとに異なります。</p>
+    </div>
+  </section>
+
+  <!-- 中間CTA 3 -->
+  <section class="section -tight" aria-label="ROI改善プランのご案内">
+    <div class="wrap">
+      <div class="ctapanel js-fade">
+        <div class="ctapanel__text">
+          <p class="head__en">FOR YOUR ROI</p>
+          <h2 class="ctapanel__title">事例を見て興味を持った方へ。<br>御社専用のROI改善プランをお出しします。</h2>
+          <p class="ctapanel__desc">事業規模・拠点数・職種特性をお伺いし、3年間の媒体費削減幅・応募増加見込み・必要投資額をまとめた個別改善プランをご提案します。</p>
+        </div>
+        <div class="ctapanel__action">
+          <a href="#contact" class="btn -lg">
+            <span class="btn__text">ROI改善プランの提示を依頼<small>無料・1営業日以内に返信</small></span>
+            <span class="btn__icon" aria-hidden="true"></span>
+          </a>
+          <p class="ctapanel__note">※ 競合比較・他社見積もりとの比較検討、歓迎です</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 比較表（TimeRex プランと料金） -->
+  <section class="section compare" data-bg="blur" aria-labelledby="compare-title">
+    <div class="wrap">
+      <div class="head -center js-fade">
+        <p class="head__en">COMPARISON</p>
+        <h2 id="compare-title" class="head__title">他社制作・SaaS・<br class="sp-br">Indeed運用<br>との違い</h2>
+        <p class="head__desc">「Web制作会社に頼む」「求人系SaaSを使う」「Indeed運用代行に任せる」、<br>それぞれと比べてセルバの求人ポータル構築は何が違うのか、客観的に整理しました。</p>
+      </div>
+      <div class="cmp js-fade -delay">
+        <div class="cmp__scroll">
+          <table class="cmp__table">
+            <thead>
+              <tr>
+                <th scope="col" class="cmp__corner"><span class="cmp__pill -outline">比較項目</span></th>
+                <th scope="col" class="cmp__plan -selva"><span class="cmp__pill -selva"><em>推奨</em>セルバ</span></th>
+                <th scope="col" class="cmp__plan"><span class="cmp__pill">他のWeb制作会社</span></th>
+                <th scope="col" class="cmp__plan"><span class="cmp__pill">求人系SaaS</span></th>
+                <th scope="col" class="cmp__plan"><span class="cmp__pill">Indeed運用代行</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">自社求職者DBの蓄積</th>
+                <td class="-selva"><b class="mk -best">◎</b>自社資産として蓄積</td>
+                <td><b class="mk">△</b>制作会社次第</td>
+                <td><b class="mk">△</b>SaaS側に蓄積</td>
+                <td><b class="mk -no">×</b>媒体側に蓄積</td>
+              </tr>
+              <tr>
+                <th scope="row">SEO・自然流入設計</th>
+                <td class="-selva"><b class="mk -best">◎</b>職種×エリア大量生成</td>
+                <td><b class="mk">△</b>表層対応のみが多い</td>
+                <td><b class="mk -no">×</b>テンプレ依存</td>
+                <td><b class="mk -no">×</b>媒体内CPCのみ</td>
+              </tr>
+              <tr>
+                <th scope="row">業界特化の要件定義</th>
+                <td class="-selva"><b class="mk -best">◎</b>創業20年・支援120社</td>
+                <td><b class="mk -no">×</b>業界知見が浅い</td>
+                <td><b class="mk">△</b>標準機能の範囲</td>
+                <td><b class="mk">△</b>媒体特化のみ</td>
+              </tr>
+              <tr>
+                <th scope="row">カスタマイズ・拡張性</th>
+                <td class="-selva"><b class="mk -best">◎</b>事業成長に合わせ拡張</td>
+                <td><b class="mk">△</b>制作後の改修弱め</td>
+                <td><b class="mk -no">×</b>機能制約</td>
+                <td><b class="mk -no">×</b>媒体仕様内</td>
+              </tr>
+              <tr>
+                <th scope="row">採用ROI改善のコミット</th>
+                <td class="-selva"><b class="mk -best">◎</b>3年ROIで設計</td>
+                <td><b class="mk -no">×</b>納品で完了</td>
+                <td><b class="mk -no">×</b>機能提供のみ</td>
+                <td><b class="mk">△</b>媒体KPIまで</td>
+              </tr>
+              <tr>
+                <th scope="row">公開後の運用伴走</th>
+                <td class="-selva"><b class="mk -best">◎</b>SEO/CVR改善まで</td>
+                <td><b class="mk">△</b>保守のみが多い</td>
+                <td><b class="mk -good">○</b>カスタマーサクセス</td>
+                <td><b class="mk -good">○</b>媒体運用代行</td>
+              </tr>
+              <tr class="-price">
+                <th scope="row">初期費用の目安</th>
+                <td class="-selva"><strong>300万円〜</strong></td>
+                <td>200〜500万円</td>
+                <td>初期20〜80万円</td>
+                <td>媒体費の20〜30%</td>
+              </tr>
+              <tr class="-price">
+                <th scope="row">3年トータルコスト感</th>
+                <td class="-selva"><strong>構築費＋運用費／資産化</strong></td>
+                <td>制作費＋媒体費依存</td>
+                <td>月10〜30万 ×36</td>
+                <td>媒体費 ×36 ＋手数料</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cmp__scroll-hint" aria-hidden="true">横にスクロールできます</p>
+      </div>
+      <div class="compare__summary js-fade">
+        <p>他社・SaaS・Indeed運用は「機能や運用の提供」が中心。<br>セルバは「採用ROIの構造そのものを変える」ことにコミットしている点が、最も大きな違いです。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 選ばれる5つの理由（Zoff Zoffで働くということ：左固定＋右スクロール） -->
+  <section class="reasons" aria-labelledby="reasons-title">
+    <div class="reasons__sticky">
+      <div class="reasons__kv">
+        <img class="img-fill " src="assets/img/reasons-kv.webp" alt="" loading="lazy" decoding="async">
+        <div class="reasons__head">
+          <p class="head__en">WHY SELVA</p>
+          <h2 id="reasons-title" class="reasons__title">セルバが選ばれる<br>5つの理由</h2>
+          <p class="reasons__desc">「ただ作るだけのWeb制作会社」ではなく、利益向上に直結する設計から運用までを伴走する体制を、20年かけて作り上げてきました。</p>
+        </div>
+      </div>
+      <div class="reasons__main">
+        <ol class="reasons__list">
+          <li class="reason">
+            <div class="reason__img">
+              <img class="img-fill " src="assets/img/reason-01.webp" alt="" loading="lazy" decoding="async">
+              <span class="reason__num"><span>01</span>05</span>
+              <h3 class="reason__title"><span>「採用ROIをどう変えるか」を<br>起点にした要件定義</span></h3>
+            </div>
+            <p class="reason__text">セルバの企画は、機能の網羅性ではなく「導入後3年で媒体費・採用単価がどう変わるか」のシミュレーションから始まります。求人ポータルは作って終わりではなく、利益構造を変えるための投資として要件定義します。</p>
+          </li>
+          <li class="reason">
+            <div class="reason__img">
+              <img class="img-fill " src="assets/img/reason-02.webp" alt="" loading="lazy" decoding="async">
+              <span class="reason__num"><span>02</span>05</span>
+              <h3 class="reason__title"><span>創業20年・支援120社の<br>人材ビジネス領域知見</span></h3>
+            </div>
+            <p class="reason__text">株式会社セルバの源流は、2003年に学生5名が運営したアルバイト求人サイトです。人材紹介・派遣・スカウト・求人メディアなど近接領域の業務フローを熟知しており、紹介担当者が日々何に時間を使っているかを前提に設計します。</p>
+          </li>
+          <li class="reason">
+            <div class="reason__img">
+              <img class="img-fill " src="assets/img/reason-03.webp" alt="" loading="lazy" decoding="async">
+              <span class="reason__num"><span>03</span>05</span>
+              <h3 class="reason__title"><span>エンジニア・デザイナー・<br>マーケターのワンチーム体制</span></h3>
+            </div>
+            <p class="reason__text">SEO・UX・開発が分断された外注体制では、求人ポータルは中途半端な仕上がりになります。セルバは同じプロジェクトに開発・デザイン・集客の専任担当が並走する一体型体制で、検索順位・応募CVRまで一気通貫で責任を持ちます。</p>
+          </li>
+          <li class="reason">
+            <div class="reason__img">
+              <div class="ph" data-label="PHOTO 24 / 16:9"></div>
+              <span class="reason__num"><span>04</span>05</span>
+              <h3 class="reason__title"><span>公開後の継続的な運用伴走</span></h3>
+            </div>
+            <p class="reason__text">初動で成果が出ても、3年後に勝ち続けるかは別問題です。セルバは月次のSEO改善・応募導線改善・スカウト施策の効果検証を行う運用支援パッケージを用意。「リリースで終わり」ではなく、グロースまで一緒に走ります。</p>
+          </li>
+          <li class="reason">
+            <div class="reason__img">
+              <img class="img-fill " src="assets/img/reason-05.webp" alt="" loading="lazy" decoding="async">
+              <span class="reason__num"><span>05</span>05</span>
+              <h3 class="reason__title"><span>プライバシーマーク認定・<br>大規模運用に耐える基盤</span></h3>
+            </div>
+            <p class="reason__text">求職者の個人情報を扱う事業には、運用会社のセキュリティ水準が問われます。セルバはプライバシーマーク認定を取得し、会員30万人・月売上9億円規模のポータル運用で培ったセキュリティと可用性のノウハウを、御社のプロジェクトにも反映します。</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- COOメッセージ（Zoff 目指す未来） -->
+  <section class="message" aria-label="取締役COOからのメッセージ">
+    <div class="message__inner">
+      <div class="message__body">
+        <p class="message__concept js-fade">セルバが大切にしているのは「ただ作る」ではなく、クライアントの利益向上に直接効くサイトを創ることです。</p>
+        <p class="message__text js-fade">人材紹介事業の難しさは、毎月の媒体費とROIのバランスを取り続ける厳しさにあります。だからこそ、3年後に媒体に依存せず、自社で求職者を集め続けられる構造を作る支援を、私たちはずっと続けてきました。</p>
+        <p class="message__text js-fade">「サイトが完成しただけ」ではなく、「利益が変わった」と言っていただけるところまで伴走します。検討段階のご相談、他社比較中のご相談も歓迎です。まずは現状の数字を一度、無料で診断させてください。</p>
+      </div>
+      <div class="message__person js-fade">
+        <div class="message__photo"><div class="ph" data-label="PHOTO 26 / 1:1"></div></div>
+        <p class="message__name">井上 博登<span>株式会社セルバ 取締役COO ／ 人材ビジネス支援担当</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ご利用の流れ（Zoff 採用情報カード） -->
+  <section class="section process" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="process__layout">
+        <div class="head js-fade">
+          <p class="head__en">PROCESS</p>
+          <h2 id="process-title" class="head__title">ご利用の流れ</h2>
+          <p class="head__desc">企画段階からご一緒し、公開後の運用・改善まで伴走します。</p>
+        </div>
+        <ol class="process__list js-fade -delay">
+          <li class="step">
+            <p class="step__num">01</p>
+            <h3 class="step__title">無料相談</h3>
+            <div class="step__img"><img class="img-fill -contain" src="assets/img/step-01.webp" alt="" loading="lazy" decoding="async"></div>
+            <p class="step__text">事業課題・現状の集客状況をヒアリング。1営業日以内にご返信。</p>
+          </li>
+          <li class="step">
+            <p class="step__num">02</p>
+            <h3 class="step__title">要件定義</h3>
+            <div class="step__img"><img class="img-fill -contain" src="assets/img/step-02.webp" alt="" loading="lazy" decoding="async"></div>
+            <p class="step__text">必要機能・SEO設計・運用体制を整理し、お見積りをご提示。</p>
+          </li>
+          <li class="step">
+            <p class="step__num">03</p>
+            <h3 class="step__title">設計・開発</h3>
+            <div class="step__img"><img class="img-fill -contain" src="assets/img/step-03.webp" alt="" loading="lazy" decoding="async"></div>
+            <p class="step__text">ワイヤーフレーム→デザイン→実装まで担当者が一気通貫で対応。</p>
+          </li>
+          <li class="step">
+            <p class="step__num">04</p>
+            <h3 class="step__title">公開・初期集客</h3>
+            <div class="step__img"><img class="img-fill -contain" src="assets/img/step-04.webp" alt="" loading="lazy" decoding="async"></div>
+            <p class="step__text">公開後の初期SEO設定・スカウト導線テスト・初動データ計測。</p>
+          </li>
+          <li class="step">
+            <p class="step__num">05</p>
+            <h3 class="step__title">運用支援</h3>
+            <div class="step__img"><img class="img-fill -contain" src="assets/img/step-05.webp" alt="" loading="lazy" decoding="async"></div>
+            <p class="step__text">応募数・会員数・CVRをモニタリングし、毎月の改善提案を実施。</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金プラン（TimeRex プラン列＋EMS クリーム色の面） -->
+  <section class="section pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <div class="pricing__panel">
+        <div class="head js-fade">
+          <p class="head__en">PRICING</p>
+          <h2 id="pricing-title" class="head__title">料金プラン</h2>
+          <p class="head__desc">機能要件と運用範囲によって変動します。まずはレンジ感の目安としてご参考ください。</p>
+        </div>
+        <div class="plan js-fade -delay">
+          <h3 class="plan__name">求人ポータル構築プラン</h3>
+          <div class="plan__price">
+            <p class="plan__amount"><span class="plan__from">FROM</span><span class="plan__num">300</span><span class="plan__unit">万円</span><span class="plan__tilde">〜</span></p>
+            <p class="plan__note">※要件定義・SEO設計・基本機能を含む標準モデル価格。スカウト・CRM連携・LINE自動配信などのオプション追加可。</p>
+          </div>
+          <ul class="plan__list">
+            <li>求人検索DB／詳細ページ自動生成</li>
+            <li>会員登録・マイページ機能</li>
+            <li>SEO構造設計・サイトマップ自動生成</li>
+            <li>応募管理（管理画面付き）</li>
+            <li>スマホ最適化（レスポンシブ対応）</li>
+            <li class="-opt">スカウト機能（オプション）</li>
+            <li class="-opt">LINE連携／メール自動配信（オプション）</li>
+            <li class="-opt">運用支援パッケージ（月額別）</li>
+          </ul>
+          <div class="plan__cta">
+            <a href="#contact" class="btn">
+              <span class="btn__text">詳しい見積もりを依頼<small>無料・1営業日以内に返信</small></span>
+              <span class="btn__icon" aria-hidden="true"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section class="section faq" data-bg="blur" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="head -center js-fade">
+        <p class="head__en">FAQ</p>
+        <h2 id="faq-title" class="head__title">よくあるご質問</h2>
+      </div>
+      <div class="faq__list js-fade -delay">
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">初期費用はどれくらいかかりますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>標準的なモデルで300万円〜が目安です。必要機能・既存システムとの連携範囲・SEO設計の深さによって変動するため、ヒアリング後に正式見積もりをご提示します。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">制作期間はどれくらいですか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>標準的な求人ポータルで、ヒアリング開始から公開まで4〜6ヶ月が目安です。スカウトや高度なCRM連携を含む場合は7〜8ヶ月見込みでスケジュールを引きます。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">既存サイト・既存DBから移行できますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>可能です。CSVエクスポートや既存CMSのAPIを使い、求人データ・会員データの移行を対応した実績があります。最初のヒアリングで現状の構成を確認させてください。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">公開後の運用はどこまで支援してもらえますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>月次の運用支援プランをご用意しています。アクセス解析・SEO改善提案・応募導線の改善・スカウト施策の効果測定など、事業成果に直結する改善活動を継続的にお手伝いします。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">媒体経由の応募はそのままで、自社流入だけ増やすことは可能ですか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>もちろん可能です。多くのクライアントは、最初は媒体運用と並行で自社流入を伸ばし、ROIを見ながら媒体予算を段階的にシフトしています。リスクを抑えた展開設計をご提案します。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">地方の人材紹介会社でも導入できますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>地方拠点の人材紹介会社・専門職特化の事業者ともに支援実績があります。地方×職種のロングテールSEOは、むしろ地方拠点ほど勝ち筋を作りやすい領域です。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">媒体運用の経験がない社内でも、自社サイトを運用できますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>運用しやすさを前提に管理画面を設計しているため、求人投稿・募集停止・スカウト送信など日常運用は社内で完結できます。SEO改善や追加機能開発が必要な場面のみ運用支援プランで対応するため、現場の負担を最小限に抑えながら成果を伸ばせます。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">公開までに、社内ではどのくらいの体制が必要ですか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>標準的なプロジェクトでは、御社側で担当者1〜2名（事業責任者＋運用担当）の関与で進められる体制を想定しています。要件定義時のヒアリング、デザイン確認、求人データの初期投入の3フェーズで集中的にお時間をいただき、それ以外はセルバ側で進めます。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">セキュリティ対応はどこまでしてもらえますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>SSL化・WAF導入・IP制限・DDoS耐性確保はもちろん、求職者の個人情報保護のための権限分離・操作ログ記録・退会データ消去まで標準対応します。セルバはプライバシーマーク認定取得済みであり、規模・センシティビティの高いポータル運用実績があります。</p></div>
+        </details>
+        <details class="qa">
+          <summary class="qa__q"><span class="qa__mark">Q</span><span class="qa__text">相談しただけで、後日しつこい営業がくることはありますか？</span><span class="qa__toggle" aria-hidden="true"></span></summary>
+          <div class="qa__a"><span class="qa__mark -a">A</span><p>いいえ。セルバはBtoB商材で「導入は経営判断」と理解しているため、検討段階のご相談に対して営業電話を繰り返すことはありません。資料請求のみのご利用、他社比較中のご相談、構想段階の壁打ち、いずれも歓迎です。</p></div>
+        </details>
+      </div>
+      <!-- 安心バッジ（TimeRex 利用シーンのチップ） -->
+      <ul class="assure js-fade">
+        <li class="assure__item"><strong>営業電話なし</strong><span>しつこい追客はいたしません</span></li>
+        <li class="assure__item"><strong>相談だけOK</strong><span>構想段階の壁打ちも歓迎</span></li>
+        <li class="assure__item"><strong>比較検討歓迎</strong><span>他社見積もり中のご相談OK</span></li>
+        <li class="assure__item"><strong>1営業日返信</strong><span>翌営業日以内に担当者よりご連絡</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- お問い合わせ -->
+  <section id="contact" class="section contact" data-bg="sky" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact__grid">
+        <div class="contact__info js-fade">
+          <p class="head__en">CONTACT</p>
+          <h2 id="contact-title" class="contact__title">30秒で送信完了。<br>まずは無料の集客診断から。</h2>
+          <p class="contact__badge">しつこい営業はいたしません</p>
+          <p class="contact__desc">現状の媒体費・応募数の課題をお伺いし、媒体費削減シミュレーション／集客構造診断／ROI改善プランのいずれかをお返しします。<br>構想段階・他社比較中・資料請求のみ、いずれの目的でも歓迎です。</p>
+          <div class="contact__tel">
+            <p class="contact__tel-label">お急ぎの方はこちら</p>
+            <a href="tel:0358431958" class="contact__tel-num">03-5843-1958</a>
+            <p class="contact__tel-hours">受付時間：月〜金 10:00〜18:00（祝日除く）</p>
+          </div>
+          <ul class="chips">
+            <li class="chip">支援実績120社+</li>
+            <li class="chip">西日本ベストベンチャー100</li>
+            <li class="chip">プライバシーマーク認定</li>
+          </ul>
+        </div>
+        <div class="form-card js-fade -delay">
+          <form id="contactForm" class="form" action="/lp/contact.php" method="post" novalidate>
+            <p class="head__en">FREE / 30 SECONDS</p>
+            <h3 class="form__title">無料相談・集客診断のご依頼</h3>
+            <p class="form__lead">必須項目は 氏名・メールアドレス の2項目だけ。<br>その他は任意ですので、わかる範囲でご記入ください。</p>
+            <p class="form__notice"><strong>営業電話・メルマガ配信は行いません。</strong> 1営業日以内に、ご相談内容に対する個別返信を担当者よりお送りします。</p>
+
+            <div class="form__row">
+              <label for="f-name" class="form__label">氏名 <span class="form__req">必須</span></label>
+              <input id="f-name" name="name" type="text" class="form__input" placeholder="例）山田 太郎" required autocomplete="name">
+              <p class="form__error" data-error-for="f-name">氏名をご入力ください</p>
+            </div>
+            <div class="form__row">
+              <label for="f-email" class="form__label">メールアドレス <span class="form__req">必須</span></label>
+              <input id="f-email" name="email" type="email" class="form__input" placeholder="example@your-company.co.jp" required autocomplete="email">
+              <p class="form__error" data-error-for="f-email">正しいメールアドレスをご入力ください</p>
+            </div>
+            <div class="form__cols">
+              <div class="form__row">
+                <label for="f-company" class="form__label">会社名 <span class="form__opt">任意</span></label>
+                <input id="f-company" name="company" type="text" class="form__input" placeholder="例）株式会社〇〇" autocomplete="organization">
+              </div>
+              <div class="form__row">
+                <label for="f-tel" class="form__label">電話番号 <span class="form__opt">任意</span></label>
+                <input id="f-tel" name="tel" type="tel" class="form__input" placeholder="03-1234-5678" autocomplete="tel">
+              </div>
+            </div>
+            <div class="form__cols">
+              <div class="form__row">
+                <label for="f-budget" class="form__label">想定のご予算 <span class="form__opt">任意</span></label>
+                <select id="f-budget" name="budget" class="form__input -select">
+                  <option value="">選択してください</option>
+                  <option>～100万円</option>
+                  <option>101万円～200万円</option>
+                  <option>201万円～300万円</option>
+                  <option>301万円～500万円</option>
+                  <option>501万円～1000万円</option>
+                  <option>1000万円～</option>
+                  <option>未定</option>
+                </select>
+              </div>
+              <div class="form__row">
+                <label for="f-service" class="form__label">ご希望のサービス <span class="form__opt">任意</span></label>
+                <select id="f-service" name="service" class="form__input -select">
+                  <option value="">選択してください</option>
+                  <option>媒体費削減シミュレーション</option>
+                  <option>集客構造の無料診断</option>
+                  <option>ROI改善プランの提示</option>
+                  <option>システム開発</option>
+                  <option>集客支援</option>
+                  <option>SEO、LLMO対策</option>
+                  <option>企画・仕様作成</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__row">
+              <label for="f-message" class="form__label">ご相談内容 <span class="form__opt">任意</span></label>
+              <textarea id="f-message" name="message" class="form__input -textarea" rows="4" placeholder="現状のお悩みやご要望をご記入ください（未記入でもOK／1営業日以内に担当者より返信します）"></textarea>
+            </div>
+            <div class="form__row">
+              <label class="form__agree"><input type="checkbox" id="f-agree" required> <span><a href="https://www.selva-i.co.jp/privacy/" target="_blank" rel="noopener">個人情報の取扱について</a>に同意の上、送信します</span></label>
+              <p class="form__error" data-error-for="f-agree">同意のチェックをお願いします</p>
+            </div>
+            <div class="form__hp" aria-hidden="true">
+              <label for="f-website">Website (do not fill)</label>
+              <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="form__submit">
+              <button type="submit" class="btn -lg -full">
+                <span class="btn__text">無料で相談する<small>所要30秒・営業電話なし／1営業日返信</small></span>
+                <span class="btn__icon" aria-hidden="true"></span>
+              </button>
+              <p class="form__after">送信後、1営業日以内に担当者よりご返信します</p>
+            </div>
+          </form>
+          <div class="form__done" hidden>
+            <p class="form__done-title">お問い合わせを受け付けました</p>
+            <p>お問い合わせいただき、誠にありがとうございます。<br>1営業日以内に担当者よりご連絡いたします。</p>
+            <p class="form__done-note">※メール送信画面が開かない場合は、お手数ですが support@selva-i.co.jp まで直接ご連絡ください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- フッター（EMS フッター） -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <img src="assets/img/logo.svg" alt="株式会社セルバ" width="158" height="40" class="footer__logo">
+      <p class="footer__name">株式会社セルバ</p>
+      <p class="footer__tagline">「利益につなげる。未来につながる。」</p>
+      <p class="footer__desc">NTTデータとYahoo!JAPAN出身の2名が起ち上げたWebシステム開発・集客支援会社。<br>支援実績120社以上。会員数30万人、月売上9億円のポータル開発実績。</p>
+    </div>
+    <div class="footer__col">
+      <p class="footer__head">OFFICE</p>
+      <dl class="footer__office">
+        <dt>【東京本社】</dt>
+        <dd>〒104-0061<br>東京都中央区銀座1丁目3番3号 G1ビル7階<br>TEL：03-5843-1958</dd>
+        <dt>【大阪本社】</dt>
+        <dd>〒530-0047<br>大阪市北区西天満1丁目2番5号 大阪JAビル14階<br>TEL：06-6366-7906</dd>
+      </dl>
+    </div>
+    <div class="footer__col">
+      <p class="footer__head">COMPANY</p>
+      <ul class="footer__company">
+        <li>設立：2003年7月</li>
+        <li>代表取締役CEO：中山 健</li>
+        <li>取締役COO：井上 博登</li>
+        <li>従業員数：50名（グループ含む）</li>
+        <li>有料職業紹介許可：27-ユ-302296</li>
+        <li>労働者派遣事業許可：27-302958</li>
+        <li>プライバシーマーク（20002166）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2003 SELVA Co., Ltd. All rights reserved.</p>
+    <a href="https://www.selva-i.co.jp/privacy/" target="_blank" rel="noopener">個人情報保護方針</a>
+  </div>
+</footer>
+
+<!-- スマホ下部の固定ボタン -->
+<div class="spbar" aria-label="お問い合わせ">
+  <a href="tel:0358431958" class="spbar__btn -tel">電話で相談</a>
+  <a href="#contact" class="spbar__btn -cta">無料で相談する</a>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

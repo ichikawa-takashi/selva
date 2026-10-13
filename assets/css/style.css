@@ -1,0 +1,731 @@
+/* =========================================================
+   SELVA 求人ポータル構築 LP
+   参考：EMS（全体・背景・KV・ボタン）／Zoff（数字・理由・メッセージ・流れ）
+        TimeRex（比較表・特徴・機能一覧・事例・チップ）／山龢（重なるスライド）
+   ========================================================= */
+
+:root {
+  /* カラー */
+  --color-sky-700: #1A78AE;   /* CTA背景・リンク・ラベル */
+  --color-sky-500: #6EC6EA;   /* 水色の面（濃色セクションの代わり）・フッター */
+  --color-sky-300: #B9E3F4;   /* 淡い面 */
+  --color-sky-100: #D6EFF8;   /* 最も淡い面・行の縞 */
+  --color-base: #E8F4F1;      /* メイン背景 */
+  --color-white: #FFFFFF;     /* カード */
+  --color-line: #CBDDDF;      /* 罫線 */
+  --color-cream: #F4F0DC;     /* 料金セクションの面 */
+  --text-primary: #1F3140;
+  --text-secondary: #4A5F6E;
+  --text-inverse: #FFFFFF;
+  --color-accent: #2A8F9C;        /* 大きな数字・線のみ */
+  --color-accent-light: #7FD9D2;  /* 水色の面の上のアクセント */
+  /* 背景の四角だけに使う淡い色 */
+  --deco-mint: #8FDAD3;
+  --deco-sky: #A9DDF2;
+  --deco-leaf: #C6E6A0;
+  --deco-cream: #F3EED4;
+  --deco-deep: #4FA9B8;
+
+  /* 寸法（EMS の値を基準に ±10〜20% 調整） */
+  --gutter: clamp(20px, 3.4vw, 54px);
+  --space-section: clamp(88px, 8.6vw, 132px);
+  --space-head: clamp(36px, 3.6vw, 56px);
+  --gap: clamp(16px, 2.2vw, 36px);
+  --radius: clamp(9px, .8vw, 12px);
+  --radius-s: 5px;
+  --step: clamp(46px, 4.6vw, 72px);
+  --max: 1240px;
+
+  --fz-root: clamp(14.5px, 1.05vw, 15.5px);
+  --fz-h2: clamp(26px, 2.5vw, 38px);
+  --fz-lead: clamp(16px, 1.25vw, 19px);
+  --fz-h3: clamp(20px, 1.7vw, 26px);
+
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --dur-fade: .6s;
+}
+
+/* ---------- ベース ---------- */
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--color-base);
+  color: var(--text-primary);
+  font-size: var(--fz-root);
+  line-height: 1.9;
+  letter-spacing: .04em;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+p, h1, h2, h3, ul, ol, dl, dd { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+:focus-visible { outline: 2px solid var(--color-sky-700); outline-offset: 3px; }
+.main { position: relative; z-index: 2; }
+.wrap { max-width: calc(var(--max) + var(--gutter) * 2); margin-left: auto; margin-right: auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.section { padding-top: var(--space-section); }
+.section.-tight { padding-top: calc(var(--space-section) * .55); }
+
+/* ダミー画像 */
+.ph { position: relative; width: 100%; height: 100%; background: #C5CCD1; }
+.ph::after {
+  content: attr(data-label);
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 12px; letter-spacing: .08em; color: #6B767E;
+}
+.ph.-dark { background: #8E989F; }
+.ph.-dark::after { color: #E1E6E9; }
+.ph.-ill { background: #D9DEE1; border-radius: var(--radius-s); }
+.ph.-round { border-radius: 50%; }
+
+/* 出現（Zoff js-fade-up：.5s / 20px を .6s / 24px に） */
+.js .js-fade { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity var(--dur-fade) ease, transform var(--dur-fade) ease; }
+.js .js-fade.-delay { transition-delay: .35s; }
+.js .js-fade.is-in { opacity: 1; transform: none; }
+
+/* ---------- 見出し（EMS headingLv2 ＋ Zoff section-head） ---------- */
+.head { max-width: 760px; }
+.head.-center { margin-left: auto; margin-right: auto; text-align: center; }
+.head__en {
+  display: inline-flex; align-items: center; gap: .6em;
+  font-family: "Zalando Sans SemiExpanded", sans-serif; font-weight: 500;
+  font-size: clamp(12px, .9vw, 13.5px); line-height: 1; letter-spacing: .02em; color: var(--color-sky-700);
+}
+.head__en::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.head__title { margin-top: 18px; font-size: var(--fz-h2); font-weight: 500; line-height: 1.5; letter-spacing: .05em; }
+.head__en + .head__title { margin-top: 18px; }
+.head > .head__title:first-child { margin-top: 0; }
+.head__desc { margin-top: 22px; color: var(--text-secondary); line-height: 1.95; }
+
+/* ---------- ボタン（EMS button：文字＋矢印の四角） ---------- */
+.btn {
+  display: inline-flex; align-items: stretch; justify-content: space-between; gap: 18px;
+  padding: 7px; border: 0; border-radius: var(--radius);
+  background: var(--color-sky-700); color: var(--text-inverse);
+  text-decoration: none; cursor: pointer; font: inherit; text-align: left;
+  transition: background-color .35s ease-out;
+}
+.btn__text { align-self: center; padding-left: 16px; font-weight: 500; font-size: clamp(15px, 1.1vw, 16.5px); line-height: 1.5; }
+.btn__text small { display: block; margin-top: 2px; font-size: 12px; font-weight: 400; opacity: .85; letter-spacing: .03em; }
+.btn__icon {
+  position: relative; flex: none; width: clamp(46px, 3.6vw, 54px); min-height: clamp(46px, 3.6vw, 54px);
+  border-radius: calc(var(--radius) - 4px); background: rgba(255, 255, 255, .18);
+  transition: background-color .35s ease-out;
+}
+.btn__icon::before {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 11px; height: 11px; margin-top: -5.5px; margin-left: -5.5px;
+  background: currentColor;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M10 5 6.2 8.8 5.2 7.7 7.1 5.8H0V4.2h7.1L5.2 2.3l1-1.1z"/></svg>') center / contain no-repeat;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M10 5 6.2 8.8 5.2 7.7 7.1 5.8H0V4.2h7.1L5.2 2.3l1-1.1z"/></svg>') center / contain no-repeat;
+  transition: transform .35s ease-out;
+}
+@media (hover: hover) {
+  .btn:hover { background: #156893; }
+  .btn:hover .btn__icon { background: rgba(255, 255, 255, .3); }
+  .btn:hover .btn__icon::before { transform: translateX(3px); }
+}
+.btn.-lg .btn__text { font-size: clamp(16px, 1.25vw, 18px); }
+.btn.-full { width: 100%; }
+
+/* チップ（TimeRex 利用シーンのタグ） */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.chip {
+  padding-top: 5px; padding-bottom: 5px; padding-left: 14px; padding-right: 14px;
+  border: 1px solid var(--color-sky-700); border-radius: 999px; background: var(--color-white);
+  color: var(--color-sky-700); font-size: 12.5px; font-weight: 500; line-height: 1.5;
+}
+
+/* =========================================================
+   背景の四角（EMS Background / object）
+   ========================================================= */
+.bgfx { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.bgfx__box { position: absolute; left: 0; width: 100%; height: 56.25vw; top: calc(50% - 28.125vw); }
+.bgfx__obj { position: absolute; aspect-ratio: 1 / 1; border-radius: clamp(8px, .8vw, 12px); will-change: transform; }
+.bgfx__obj.-o1 { width: 7.4%; left: 50%; margin-left: -37%; top: 25%; background: var(--deco-leaf); filter: blur(10px); }
+.bgfx__obj.-o2 { width: 14.4%; left: 50%; margin-left: -27.5%; top: 6%; background: var(--deco-cream); filter: blur(10px); }
+.bgfx__obj.-o3 { width: 7.6%; right: 50%; margin-right: -9%; top: 74%; background: var(--deco-deep); filter: blur(10px); opacity: .75; }
+.bgfx__obj.-o4 { width: 7.6%; right: 50%; margin-right: -19%; top: 12%; background: var(--deco-mint); filter: blur(10px); }
+.bgfx__obj.-o5 { width: 7.6%; right: 50%; margin-right: -38%; top: 30%; background: var(--deco-sky); filter: blur(10px); }
+.bgfx__obj.-o6 { width: 7.6%; left: 50%; margin-left: -5%; top: 64%; background: var(--deco-mint); }
+.bgfx__obj.-o7 { width: 7.4%; left: 50%; margin-left: -45%; top: 57%; background: var(--deco-sky); }
+.bgfx__obj.-o8 { width: 14.4%; right: 50%; margin-right: -42%; top: 50%; background: var(--deco-leaf); }
+/* セクションに応じて四角の上に膜を重ねる（EMS -bg-blur / -bg-dark） */
+.bgfx__veil { position: absolute; inset: 0; background-color: transparent; transition: background-color .5s ease, -webkit-backdrop-filter .5s ease, backdrop-filter .5s ease; }
+html.-bg-blur .bgfx__veil { background-color: rgba(232, 244, 241, .45); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+html.-bg-sky .bgfx__veil { background-color: rgba(110, 198, 234, .82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); }
+@media (max-width: 767px) {
+  .bgfx__box { height: 120vw; top: calc(50% - 60vw); }
+  .bgfx__obj.-o2, .bgfx__obj.-o8 { width: 22%; }
+  .bgfx__obj.-o1, .bgfx__obj.-o3, .bgfx__obj.-o4, .bgfx__obj.-o5, .bgfx__obj.-o6, .bgfx__obj.-o7 { width: 12%; }
+}
+
+/* =========================================================
+   切り欠きタブ（EMS -inverted-corner）
+   ========================================================= */
+.tab { position: relative; background: var(--color-base); }
+.tab::before, .tab::after { content: ""; position: absolute; width: var(--radius); height: var(--radius); pointer-events: none; }
+/* 左上タブ：右上と左下に内側の丸み */
+.tab.-tl { border-bottom-right-radius: var(--radius); }
+.tab.-tl::before { top: 0; left: 100%; background: radial-gradient(circle at 100% 100%, transparent calc(var(--radius) - .5px), var(--color-base) var(--radius)); }
+.tab.-tl::after { top: 100%; left: 0; background: radial-gradient(circle at 100% 100%, transparent calc(var(--radius) - .5px), var(--color-base) var(--radius)); }
+/* 右上タブ：左上と右下に内側の丸み */
+.tab.-tr { border-bottom-left-radius: var(--radius); }
+.tab.-tr::before { top: 0; right: 100%; background: radial-gradient(circle at 0 100%, transparent calc(var(--radius) - .5px), var(--color-base) var(--radius)); }
+.tab.-tr::after { top: 100%; right: 0; background: radial-gradient(circle at 0 100%, transparent calc(var(--radius) - .5px), var(--color-base) var(--radius)); }
+
+/* =========================================================
+   ヘッダー（EMS header）
+   ========================================================= */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none; }
+.header > * { pointer-events: auto; }
+.header__logo { display: flex; align-items: center; gap: 18px; padding-top: 18px; padding-bottom: 16px; padding-left: clamp(20px, 2.4vw, 34px); padding-right: 22px; }
+.header__logo-link { display: block; width: clamp(118px, 9.6vw, 146px); }
+.header__site { font-size: 12px; line-height: 1.4; color: var(--text-secondary); letter-spacing: .03em; }
+.header__actions { display: flex; gap: 6px; padding-top: 12px; padding-bottom: 12px; padding-left: 12px; padding-right: 12px; }
+.header__btn {
+  display: flex; align-items: center; gap: 10px; height: 48px; padding-left: 16px; padding-right: 16px;
+  border-radius: calc(var(--radius) - 2px); text-decoration: none; font-weight: 500; font-size: 14px; line-height: 1;
+  transition: background-color .35s ease-out;
+}
+.header__btn.-tel { background: var(--color-white); color: var(--text-primary); }
+.header__btn-label { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 11px; color: var(--color-sky-700); }
+.header__btn.-tel .header__btn-text { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 15px; letter-spacing: .02em; }
+.header__btn.-cta { background: var(--color-sky-700); color: var(--text-inverse); }
+@media (hover: hover) {
+  .header__btn.-cta:hover { background: #156893; }
+  .header__btn.-tel:hover { background: var(--color-sky-100); }
+}
+@media (max-width: 1023px) { .header__site { display: none; } }
+@media (max-width: 767px) {
+  .header__logo { padding-top: 14px; padding-bottom: 12px; padding-left: 16px; padding-right: 16px; }
+  .header__actions { display: none; }
+}
+
+/* =========================================================
+   KV（EMS firstView：写真の右下を階段状に欠く）
+   ========================================================= */
+.kv { padding-top: clamp(10px, 1.1vw, 18px); padding-left: clamp(10px, 1.1vw, 18px); padding-right: clamp(10px, 1.1vw, 18px); }
+.kv__image {
+  position: relative; overflow: hidden; border-radius: var(--radius); border-bottom-right-radius: 0;
+  height: 100vh; height: calc(100vh - clamp(20px, 2.2vw, 36px));
+  height: min(100svh - clamp(20px, 2.2vw, 36px), clamp(600px, 52vw, 800px));
+  background: #8E989F;
+}
+.kv__slides, .kv__slide { position: absolute; inset: 0; }
+.kv__slide { opacity: 0; transition: opacity 1.4s ease; }
+.kv__slide.is-active { opacity: 1; }
+.kv__image::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .66) 100%), linear-gradient(90deg, rgba(0, 0, 0, .38) 0%, rgba(0, 0, 0, 0) 60%); pointer-events: none; }
+/* オープニング後に黒い膜が晴れる（EMS mv-fade-in） */
+.kv__image::after { content: ""; position: absolute; inset: 0; z-index: 3; background: #000; opacity: 1; transition: opacity 1s ease; pointer-events: none; }
+html.is-kv-in .kv__image::after { opacity: 0; }
+.kv__notice {
+  position: absolute; z-index: 2; top: clamp(84px, 7vw, 100px); left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 40px);
+  padding-top: 8px; padding-bottom: 8px; padding-left: 8px; padding-right: 18px;
+  border-radius: 999px; background: rgba(255, 255, 255, .9); color: var(--text-primary); font-size: 13px; line-height: 1.5;
+}
+.kv__notice-label { flex: none; padding-top: 3px; padding-bottom: 3px; padding-left: 10px; padding-right: 10px; border-radius: 999px; background: var(--color-sky-700); color: var(--text-inverse); font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 11px; letter-spacing: .06em; }
+.kv__copy { position: absolute; z-index: 2; left: clamp(24px, 3.4vw, 56px); bottom: clamp(30px, 3.4vw, 54px); padding-right: calc(var(--step) * 3 + 20px); color: var(--text-inverse); }
+.kv__label { font-size: clamp(13px, 1vw, 15px); letter-spacing: .08em; opacity: .9; }
+.kv__title { margin-top: 18px; font-weight: 400; font-size: clamp(30px, 4vw, 62px); line-height: 1.3; letter-spacing: .06em; font-feature-settings: "halt"; word-break: keep-all; overflow-wrap: anywhere; }
+/* 階段（EMS は3段＋小窓。2段に減らし幅を変更） */
+.kv__steps { position: absolute; right: 0; bottom: 0; z-index: 4; }
+.kv__step { position: absolute; right: 0; display: block; height: var(--step); background: var(--color-base); }
+.kv__step.-s1 { bottom: 0; width: calc(var(--step) * 2.6); border-top-left-radius: var(--radius); }
+.kv__step.-s2 { bottom: var(--step); width: var(--step); border-top-left-radius: var(--radius); }
+.kv__step::before, .kv__step::after { content: ""; position: absolute; width: var(--radius); height: var(--radius); }
+.kv__step::before { right: 100%; bottom: 0; background: radial-gradient(circle at 0 0, transparent calc(var(--radius) - .5px), var(--color-base) var(--radius)); }
+.kv__step::after { right: 0; bottom: 100%; background: radial-gradient(circle at 0 0, transparent calc(var(--radius) - .5px), var(--color-base) var(--radius)); }
+@media (max-width: 767px) {
+  .kv__image { height: 100vh; height: calc(100svh - 20px); min-height: 560px; }
+  .kv__notice { top: 74px; font-size: 12px; border-radius: 14px; align-items: flex-start; }
+  .kv__copy { padding-right: 20px; bottom: calc(var(--step) + 22px); left: 20px; }
+  .kv__title { font-size: clamp(22px, 6.3vw, 32px); }
+}
+
+/* =========================================================
+   リード（EMS About：2カラム）
+   ========================================================= */
+.intro__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 3.4vw, 60px) var(--gap); }
+.intro__lead { font-size: clamp(24px, 2.4vw, 38px); line-height: 1.6; letter-spacing: .05em; line-break: strict; }
+.intro__text { font-size: var(--fz-lead); line-height: 1.85; }
+.intro__cta { margin-top: 36px; }
+.intro__reason { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--color-line); }
+.intro__reason-title { font-weight: 700; font-size: 14px; }
+.intro__checks { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 10px; font-size: 14px; }
+.intro__checks li { position: relative; padding-left: 20px; }
+.intro__checks li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 10px; height: 6px; border-left: 2px solid var(--color-sky-700); border-bottom: 2px solid var(--color-sky-700); transform: rotate(-45deg); }
+@media (max-width: 1023px) { .intro__grid { grid-template-columns: 1fr; } }
+
+/* 写真の帯（EMS About slider：横に流れ続ける） */
+.strip { position: relative; margin-top: clamp(70px, 6.6vw, 100px); overflow: hidden; }
+.strip__track { display: flex; align-items: center; gap: var(--gap); width: max-content; animation: strip-move 64s linear infinite; }
+.strip.is-paused .strip__track { animation-play-state: paused; }
+.strip__item { flex: none; overflow: hidden; border-radius: var(--radius); }
+.strip__item.-a { width: clamp(180px, 17vw, 270px); aspect-ratio: 3 / 4; }
+.strip__item.-b { width: clamp(260px, 25vw, 400px); aspect-ratio: 4 / 3; }
+.strip__item.-c { width: clamp(200px, 19vw, 300px); aspect-ratio: 1 / 1; }
+@keyframes strip-move { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(-50% - var(--gap) / 2), 0, 0); } }
+.strip__toggle {
+  position: absolute; right: var(--gutter); bottom: 12px; width: 34px; height: 34px; border: 0; border-radius: 8px;
+  background: rgba(255, 255, 255, .9); cursor: pointer;
+}
+.strip__toggle::before { content: ""; position: absolute; inset: 0; margin: auto; width: 10px; height: 10px; background: var(--text-primary);
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M8.3 5 3.3 9.2V.8z"/></svg>') center / contain no-repeat;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M8.3 5 3.3 9.2V.8z"/></svg>') center / contain no-repeat; }
+.strip__toggle.is-playing::before {
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2.7.8h1.5v8.4H2.7zm3.3 0h1.5v8.4H6z"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M2.7.8h1.5v8.4H2.7zm3.3 0h1.5v8.4H6z"/></svg>');
+}
+
+/* =========================================================
+   数字（Zoff p-top-number：大小のタイル）
+   ========================================================= */
+.numgrid { display: grid; gap: clamp(14px, 1.4vw, 22px); margin-top: var(--space-head); }
+.numgrid.-top { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "a b c" "d d d"; }
+.numgrid.-benefit { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "a b" "a c"; }
+.numtile { position: relative; display: flex; flex-direction: column; min-height: clamp(260px, 22vw, 330px); padding-top: clamp(16px, 1.6vw, 24px); padding-left: clamp(16px, 1.6vw, 24px); padding-right: clamp(16px, 1.6vw, 24px); padding-bottom: clamp(18px, 1.6vw, 24px); border-radius: var(--radius-s); background: var(--color-white); }
+.numtile.-a { grid-area: a; } .numtile.-b { grid-area: b; } .numtile.-c { grid-area: c; } .numtile.-d { grid-area: d; min-height: 0; }
+.numtile__label { display: inline-block; align-self: flex-start; padding-top: 3px; padding-bottom: 4px; padding-left: 10px; padding-right: 10px; border-radius: 3px; background: var(--color-sky-700); color: var(--text-inverse); font-weight: 700; font-size: clamp(13px, 1vw, 15px); line-height: 1.5; letter-spacing: .05em; }
+.numtile__body { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; }
+.numtile__value { display: flex; align-items: baseline; white-space: nowrap; color: var(--color-accent); }
+.numtile__num { font-family: "Zalando Sans SemiExpanded", sans-serif; font-weight: 500; font-size: clamp(38px, 3.6vw, 58px); line-height: 1; letter-spacing: -.01em; }
+.numtile__unit { margin-left: 6px; font-weight: 700; font-size: clamp(15px, 1.4vw, 21px); color: var(--text-primary); }
+.numtile__ill { flex: 0 1 auto; width: clamp(64px, 6.6vw, 104px); min-width: 0; aspect-ratio: 1 / 1; }
+.numtile__desc { margin-top: 18px; font-size: 14px; line-height: 1.75; color: var(--text-secondary); }
+.numtile__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.numtile__stat { display: flex; flex-direction: column; gap: 18px; padding-left: 20px; border-left: 1px solid var(--color-line); }
+.numtile__stat:first-child { padding-left: 0; border-left: 0; }
+.numtile__stats .numtile__num { font-size: clamp(34px, 3.2vw, 50px); }
+/* 成果：左のタイルを縦長にし、数字を大きく */
+.numgrid.-benefit .numtile.-a .numtile__body { flex-direction: column; align-items: flex-start; justify-content: center; gap: 28px; }
+.numgrid.-benefit .numtile.-a .numtile__num { font-size: clamp(64px, 7.4vw, 112px); }
+.numgrid.-benefit .numtile.-a .numtile__ill { width: clamp(140px, 15vw, 220px); align-self: flex-end; }
+@media (max-width: 1023px) {
+  .numgrid.-top { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "a a" "b c" "d d"; }
+  .numtile__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .numtile__stat:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 767px) {
+  .numgrid.-top { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c" "d"; }
+  .numgrid.-benefit { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c"; }
+  .numtile { min-height: 0; }
+}
+
+/* =========================================================
+   お悩み（添付イメージ：中央のイラストの周りに吹き出し）
+   ========================================================= */
+.pain__stage { position: relative; margin-top: var(--space-head); min-height: 520px; }
+.pain__ill { position: absolute; left: 50%; top: 50%; width: clamp(260px, 25vw, 360px); aspect-ratio: 1 / 1; margin-left: calc(clamp(260px, 25vw, 360px) / -2); margin-top: calc(clamp(260px, 25vw, 360px) / -2); }
+.pain__list { position: relative; height: 520px; }
+.pain__item {
+  position: absolute; display: flex; align-items: center; gap: 12px; width: min(30%, 360px);
+  padding-top: 13px; padding-bottom: 13px; padding-left: 14px; padding-right: 20px;
+  border-radius: 999px; background: var(--color-white); box-shadow: 0 10px 30px rgba(31, 49, 64, .07);
+  font-size: 14px; font-weight: 500; line-height: 1.6;
+}
+.pain__item::before { content: "!"; flex: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-sky-700); color: var(--text-inverse); font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 13px; }
+.pain__item.-l1 { top: 0; left: 4%; }
+.pain__item.-l2 { top: 26%; left: 0; }
+.pain__item.-l3 { top: 52%; left: 6%; }
+.pain__item.-l4 { top: 78%; left: 1%; }
+.pain__item.-r1 { top: 4%; right: 2%; }
+.pain__item.-r2 { top: 30%; right: 6%; }
+.pain__item.-r3 { top: 56%; right: 0; }
+.pain__item.-r4 { top: 82%; right: 4%; }
+.js .pain__item.js-fade { transition-delay: calc(var(--i, 0) * .08s); }
+.pain__arrow { width: 28px; height: 28px; margin-top: 56px; margin-left: auto; margin-right: auto; border-right: 2px solid var(--text-primary); border-bottom: 2px solid var(--text-primary); transform: rotate(45deg); }
+@media (max-width: 1023px) {
+  .pain__stage { min-height: 0; }
+  .pain__ill { position: relative; left: auto; top: auto; margin-left: auto; margin-right: auto; margin-top: 0; width: min(64vw, 300px); }
+  .pain__list { height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 36px; }
+  .pain__item { position: relative; inset: auto !important; width: auto; border-radius: 16px; }
+}
+@media (max-width: 767px) { .pain__list { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   中間CTAパネル（EMS 下部CTA：半透明の面＋大きなボタン）
+   ========================================================= */
+.ctapanel {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--gap); align-items: center;
+  padding-top: clamp(28px, 3vw, 48px); padding-left: clamp(22px, 3vw, 52px); padding-right: clamp(22px, 3vw, 52px); padding-bottom: clamp(28px, 3vw, 48px);
+  border-radius: var(--radius); background: rgba(185, 227, 244, .62); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+}
+.ctapanel__title { margin-top: 16px; font-size: clamp(20px, 1.9vw, 28px); font-weight: 500; line-height: 1.6; }
+.ctapanel__desc { margin-top: 14px; font-size: 14px; line-height: 1.85; color: var(--text-secondary); }
+.ctapanel__action .btn { width: 100%; }
+.ctapanel__note { margin-top: 12px; font-size: 12.5px; color: var(--text-secondary); }
+@media (max-width: 1023px) { .ctapanel { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   市場の構造変化（山龢：sticky で上に重なっていく）
+   ========================================================= */
+.stack { position: relative; margin-top: var(--space-head); -webkit-clip-path: inset(0); clip-path: inset(0); }
+.stack__slide { position: -webkit-sticky; position: sticky; top: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); height: 100vh; height: 100svh; overflow: hidden; }
+.stack__half { position: relative; overflow: hidden; }
+.stack__half.-num::after { content: ""; position: absolute; inset: 0; background: rgba(15, 30, 40, .35); }
+.stack__num-wrap { position: absolute; z-index: 1; left: clamp(28px, 5vw, 80px); bottom: clamp(40px, 7vh, 80px); color: var(--text-inverse); }
+.stack__label { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 13px; letter-spacing: .06em; }
+.stack__num { margin-top: 12px; font-family: "Zalando Sans SemiExpanded", sans-serif; font-weight: 300; font-size: clamp(56px, 8vw, 128px); line-height: 1; letter-spacing: -.01em; }
+.stack__half.-text { display: flex; align-items: center; }
+.stack__half.-c1 { background: var(--color-white); }
+.stack__half.-c2 { background: var(--color-sky-100); }
+.stack__half.-c3 { background: var(--color-sky-300); }
+.stack__text { max-width: 500px; padding-left: clamp(28px, 5vw, 84px); padding-right: clamp(28px, 4vw, 64px); }
+.stack__title { font-size: var(--fz-h3); font-weight: 500; line-height: 1.6; }
+.stack__text p { margin-top: 22px; line-height: 2; color: var(--text-secondary); }
+/* 進捗（山龢 左端の (01)—(03)） */
+.stack__progress { position: -webkit-sticky; position: sticky; top: 50%; z-index: 5; height: 0; display: block; }
+.stack__progress > * { position: absolute; left: clamp(10px, 1.4vw, 22px); color: var(--text-inverse); font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 11px; line-height: 1; }
+.stack__current { top: -78px; }
+.stack__bar { top: -60px; width: 1px !important; height: 120px; margin-left: 9px; background: rgba(255, 255, 255, .35); }
+.stack__bar-fill { position: absolute; left: 0; top: 0; width: 1px; height: 33.3%; background: var(--text-inverse); transition: height .5s var(--ease-out); }
+.stack__progress > span:last-child { top: 72px; }
+.market__conclusion { max-width: 880px; padding-top: clamp(64px, 6vw, 96px); }
+.market__lead { font-size: clamp(20px, 2vw, 30px); line-height: 1.7; letter-spacing: .04em; }
+.market__text { margin-top: 20px; font-size: var(--fz-lead); color: var(--text-secondary); }
+@media (max-width: 767px) {
+  .stack__slide { grid-template-columns: 1fr; grid-template-rows: 42% 58%; }
+  .stack__text p { font-size: 14px; line-height: 1.85; }
+  .stack__progress { display: none; }
+}
+
+/* =========================================================
+   Before / After（EMS 事業セクション：水色の面＋タブ付きパネル）
+   ========================================================= */
+.ba { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: stretch; gap: 0; margin-top: var(--space-head); }
+.ba__card { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius); background: rgba(255, 255, 255, .55); }
+.ba__card.-after { background: var(--color-white); }
+.ba__img { aspect-ratio: 3 / 2; }
+.ba__card.-after .ba__img { order: -1; }
+.ba__body { padding-top: clamp(22px, 2.2vw, 34px); padding-left: clamp(22px, 2.4vw, 38px); padding-right: clamp(22px, 2.4vw, 38px); padding-bottom: clamp(24px, 2.4vw, 38px); }
+.ba__label { font-weight: 700; font-size: 13px; color: var(--color-sky-700); letter-spacing: .06em; }
+.ba__card.-before .ba__label { color: var(--text-secondary); }
+.ba__title { margin-top: 12px; font-size: clamp(19px, 1.6vw, 24px); font-weight: 500; line-height: 1.6; }
+.ba__list { margin-top: 18px; }
+.ba__list li { position: relative; padding-top: 10px; padding-bottom: 10px; padding-left: 22px; border-top: 1px solid rgba(31, 49, 64, .12); font-size: 14.5px; line-height: 1.6; }
+.ba__list li::before { content: ""; position: absolute; left: 2px; top: 1.15em; width: 8px; height: 8px; border-radius: 2px; background: var(--text-secondary); }
+.ba__card.-after .ba__list li::before { background: var(--color-sky-700); }
+.ba__arrow { align-self: center; justify-self: center; width: 16px; height: 16px; border-top: 2px solid var(--text-primary); border-right: 2px solid var(--text-primary); transform: rotate(45deg); }
+@media (max-width: 1023px) {
+  .ba { grid-template-columns: 1fr; grid-template-rows: auto 56px auto; }
+  .ba__arrow { transform: rotate(135deg); }
+}
+
+/* =========================================================
+   特徴（TimeRex 機能紹介：画像の後ろに色面をずらす）
+   ========================================================= */
+.feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 88px); align-items: center; margin-top: clamp(64px, 6vw, 100px); }
+.feature.-rev .feature__text { order: 2; }
+.feature__label { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 13px; font-weight: 500; color: var(--color-sky-700); letter-spacing: .04em; }
+.feature__title { margin-top: 12px; font-size: var(--fz-h3); font-weight: 500; line-height: 1.6; }
+.feature__desc { margin-top: 20px; line-height: 2; color: var(--text-secondary); }
+.feature__visual { position: relative; padding-left: 22px; padding-top: 22px; }
+.feature__visual::before { content: ""; position: absolute; left: 0; top: 0; width: 82%; height: 78%; border-radius: var(--radius); background: var(--color-sky-500); }
+.feature.-rev .feature__visual { padding-left: 0; padding-right: 22px; }
+.feature.-rev .feature__visual::before { left: auto; right: 0; }
+.feature__img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); box-shadow: 0 16px 40px rgba(31, 49, 64, .08); }
+@media (max-width: 1023px) {
+  .feature { grid-template-columns: 1fr; }
+  .feature.-rev .feature__text { order: 0; }
+}
+
+/* =========================================================
+   機能一覧（TimeRex 拡張機能カード）
+   ========================================================= */
+.funcs__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 24px); margin-top: var(--space-head); }
+.funccard { padding-top: 30px; padding-left: clamp(20px, 2vw, 30px); padding-right: clamp(20px, 2vw, 30px); padding-bottom: 28px; border-radius: 8px; background: var(--color-white); box-shadow: 0 6px 24px rgba(31, 49, 64, .06); }
+.funccard__icon { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; margin-left: auto; margin-right: auto; border-radius: 50%; background: var(--color-sky-100); color: var(--color-sky-700); }
+.funccard__icon svg { width: 26px; height: 26px; }
+.funccard__title { margin-top: 16px; text-align: center; font-size: 17px; font-weight: 700; line-height: 1.5; }
+.funccard__title span { display: block; margin-top: 4px; font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 11px; font-weight: 500; color: var(--color-sky-700); letter-spacing: .06em; }
+.funccard__list { margin-top: 20px; }
+.funccard__list li { position: relative; padding-top: 9px; padding-bottom: 9px; padding-left: 24px; border-top: 1px solid var(--color-line); font-size: 14px; line-height: 1.6; }
+.funccard__list li::before { content: ""; position: absolute; left: 3px; top: 1.05em; width: 9px; height: 5px; border-left: 2px solid var(--color-sky-700); border-bottom: 2px solid var(--color-sky-700); transform: rotate(-45deg); }
+@media (max-width: 1023px) { .funcs__grid { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; } }
+
+/* =========================================================
+   モデルケース（TimeRex 導入事例：写真と面を重ねる）
+   ========================================================= */
+.case { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; margin-top: clamp(48px, 5vw, 80px); }
+.case__img { position: relative; z-index: 1; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius-s); }
+.case__panel { margin-left: -12%; padding-top: clamp(28px, 3vw, 48px); padding-left: calc(12% + clamp(24px, 3vw, 48px)); padding-right: clamp(24px, 3vw, 48px); padding-bottom: clamp(28px, 3vw, 48px); border-radius: var(--radius-s); background: rgba(255, 255, 255, .78); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.case.-rev { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.case.-rev .case__img { order: 2; }
+.case.-rev .case__panel { margin-left: 0; margin-right: -12%; padding-left: clamp(24px, 3vw, 48px); padding-right: calc(12% + clamp(24px, 3vw, 48px)); }
+.case__tag { display: inline-block; padding-top: 4px; padding-bottom: 4px; padding-left: 14px; padding-right: 14px; border: 1px solid var(--color-sky-700); border-radius: 999px; color: var(--color-sky-700); font-size: 12.5px; font-weight: 500; }
+.case__title { margin-top: 16px; font-size: clamp(19px, 1.7vw, 25px); font-weight: 700; line-height: 1.55; color: var(--color-sky-700); }
+.case__title span { display: block; margin-top: 4px; font-size: 15px; font-weight: 500; color: var(--text-primary); }
+.case__scale { margin-top: 8px; font-size: 12.5px; color: var(--text-secondary); }
+.case__metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+.case__metric { padding-top: 12px; padding-left: 16px; padding-bottom: 12px; padding-right: 12px; border-radius: var(--radius-s); background: var(--color-sky-100); }
+.case__metric span { display: block; font-size: 12px; color: var(--text-secondary); }
+.case__metric strong { display: block; margin-top: 4px; font-family: "Zalando Sans SemiExpanded", "Noto Sans JP", sans-serif; font-weight: 500; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.3; color: var(--color-accent); }
+.case__metric small { font-size: .6em; color: var(--text-primary); }
+.case__desc { margin-top: 18px; font-size: 14px; line-height: 1.9; color: var(--text-secondary); }
+.cases__note { margin-top: 36px; font-size: 12px; color: var(--text-secondary); text-align: center; }
+@media (max-width: 1023px) {
+  .case, .case.-rev { grid-template-columns: 1fr; }
+  .case.-rev .case__img { order: 0; }
+  .case__img { width: 86%; }
+  .case.-rev .case__img { margin-left: auto; }
+  .case__panel, .case.-rev .case__panel { margin-left: 0; margin-right: 0; margin-top: -48px; padding-top: 72px; padding-left: clamp(20px, 4vw, 40px); padding-right: clamp(20px, 4vw, 40px); }
+}
+
+/* =========================================================
+   比較表（TimeRex プランと料金）
+   ========================================================= */
+.cmp { margin-top: var(--space-head); padding-top: clamp(20px, 2.2vw, 32px); padding-left: clamp(12px, 2.2vw, 32px); padding-right: clamp(12px, 2.2vw, 32px); padding-bottom: clamp(20px, 2.2vw, 32px); border-radius: var(--radius); background: var(--color-white); }
+.cmp__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.cmp__table { width: 100%; min-width: 860px; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-size: 13.5px; }
+.cmp__table th, .cmp__table td { padding-top: 12px; padding-bottom: 12px; padding-left: 14px; padding-right: 10px; vertical-align: middle; line-height: 1.5; }
+.cmp__table thead th { padding-top: 0; padding-bottom: 16px; padding-left: 6px; padding-right: 6px; }
+.cmp__corner { width: 26%; }
+.cmp__pill { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding-left: 8px; padding-right: 8px; border-radius: 8px; background: var(--color-sky-100); color: var(--text-primary); font-size: 15px; font-weight: 700; text-align: center; line-height: 1.35; }
+.cmp__pill.-outline { background: transparent; border: 2px solid var(--color-line); color: var(--text-secondary); }
+.cmp__pill.-selva { background: var(--color-sky-700); color: var(--text-inverse); font-size: 17px; }
+.cmp__pill em { padding-top: 1px; padding-bottom: 2px; padding-left: 8px; padding-right: 8px; border-radius: 999px; background: var(--color-white); color: var(--color-sky-700); font-style: normal; font-size: 11px; }
+.cmp__table tbody th { text-align: left; font-weight: 700; color: var(--text-primary); }
+.cmp__table tbody tr:nth-child(odd) th, .cmp__table tbody tr:nth-child(odd) td { background: #F2F7F8; }
+.cmp__table tbody td { color: var(--text-secondary); text-align: center; }
+.cmp__table tbody td.-selva { position: relative; color: var(--text-primary); font-weight: 500; background: rgba(110, 198, 234, .16) !important; }
+.mk { display: block; margin-bottom: 2px; font-size: 20px; font-weight: 400; line-height: 1.2; color: var(--text-secondary); }
+.mk.-best { color: var(--color-sky-700); font-size: 22px; }
+.mk.-good { color: var(--color-accent); }
+.mk.-no { color: #8A98A3; }
+.cmp__table tr.-price td strong { font-size: 15px; color: var(--color-sky-700); }
+.cmp__scroll-hint { display: none; margin-top: 10px; font-size: 12px; color: var(--text-secondary); text-align: right; }
+.compare__summary { margin-top: 36px; text-align: center; font-size: var(--fz-lead); line-height: 1.9; }
+@media (max-width: 1023px) {
+  .cmp__scroll-hint { display: block; }
+  .cmp__table tbody th, .cmp__table thead th:first-child { position: -webkit-sticky; position: sticky; left: 0; z-index: 1; background: var(--color-white); }
+  .compare__summary { text-align: left; }
+}
+
+/* =========================================================
+   選ばれる5つの理由（Zoff Zoffで働くということ：左固定＋右が流れる）
+   ========================================================= */
+.reasons { position: relative; margin-top: var(--space-section); background: var(--color-white); }
+.reasons__sticky { display: grid; grid-template-columns: min(42vw, 660px) minmax(0, 1fr); column-gap: clamp(40px, 5.6vw, 90px); }
+.reasons__kv { position: relative; overflow: hidden; }
+.reasons__kv > .ph { position: absolute; inset: 0; }
+.reasons__kv::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 255, 255, .92) 0%, rgba(255, 255, 255, .7) 42%, rgba(255, 255, 255, 0) 70%); }
+.reasons__head { position: relative; z-index: 1; width: min(30vw, 440px); padding-top: clamp(96px, 10vw, 160px); padding-left: clamp(28px, 5.6vw, 90px); }
+.reasons__title { margin-top: 14px; font-size: clamp(24px, 2.1vw, 32px); font-weight: 500; line-height: 1.5; }
+.reasons__desc { margin-top: 24px; font-size: 14.5px; line-height: 1.85; color: var(--text-secondary); }
+.reasons__main { overflow: hidden; padding-right: var(--gutter); }
+.reasons__list { padding-top: clamp(80px, 7vw, 120px); padding-bottom: clamp(80px, 7vw, 120px); will-change: transform; }
+.reason + .reason { margin-top: clamp(40px, 3.6vw, 56px); }
+.reason__img { position: relative; width: calc(100% - 5vw); aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; }
+.reason__num { position: absolute; top: clamp(14px, 1.2vw, 20px); left: clamp(14px, 1.2vw, 20px); display: flex; align-items: baseline; padding-top: 7px; padding-bottom: 7px; padding-left: 10px; padding-right: 10px; background: var(--color-sky-700); color: var(--text-inverse); font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 14px; line-height: 1; }
+.reason__num span { position: relative; margin-right: 12px; padding-right: 12px; font-size: 22px; }
+.reason__num span::after { content: ""; position: absolute; right: 0; bottom: 2px; height: 14px; border-right: 1px dashed rgba(255, 255, 255, .8); }
+.reason__title { position: absolute; left: clamp(12px, 1.1vw, 18px); bottom: clamp(16px, 1.6vw, 26px); padding-right: 20px; font-size: clamp(17px, 1.5vw, 22px); font-weight: 700; line-height: 1.55; }
+.reason__title span { padding-top: 2px; padding-bottom: 2px; padding-left: 12px; padding-right: 12px; background: var(--color-white); color: var(--color-sky-700); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.reason__text { width: calc(100% - 5vw); margin-top: 18px; font-size: 14.5px; line-height: 1.95; color: var(--text-secondary); }
+@media (min-width: 1024px) {
+  .reasons__sticky { position: -webkit-sticky; position: sticky; top: 0; height: 100vh; height: 100svh; }
+}
+@media (max-width: 1023px) {
+  .reasons__sticky { grid-template-columns: 1fr; }
+  .reasons__kv { min-height: 0; }
+  .reasons__kv > .ph, .reasons__kv > .img-fill { display: none; }
+  .reasons__kv::after { display: none; }
+  .reasons__head { width: auto; padding-top: var(--space-section); padding-left: var(--gutter); padding-right: var(--gutter); }
+  .reasons__main { padding-left: var(--gutter); }
+  .reasons__list { padding-top: 40px; padding-bottom: 80px; }
+  .reason__img, .reason__text { width: 100%; }
+}
+
+/* =========================================================
+   COOメッセージ（Zoff 目指す未来：水色の全幅の面）
+   ========================================================= */
+.message { position: relative; background: var(--color-sky-500); color: var(--text-primary); }
+.message__inner { max-width: 1240px; margin-left: auto; margin-right: auto; padding-top: clamp(80px, 7.4vw, 116px); padding-left: var(--gutter); padding-right: var(--gutter); padding-bottom: clamp(80px, 7.4vw, 116px); }
+.message__body { max-width: 600px; margin-left: auto; margin-right: auto; }
+.message__concept { font-size: clamp(21px, 2vw, 30px); font-weight: 500; line-height: 1.75; letter-spacing: .06em; }
+.message__text { margin-top: 30px; font-size: clamp(15px, 1.1vw, 16px); line-height: 2.05; }
+.message__person { display: flex; align-items: center; justify-content: flex-end; gap: 18px; margin-top: clamp(48px, 4.6vw, 72px); }
+.message__photo { width: 76px; height: 76px; overflow: hidden; border-radius: 50%; }
+.message__photo .ph::after { font-size: 9px; }
+.message__name { font-size: 18px; font-weight: 700; line-height: 1.5; }
+.message__name span { display: block; font-size: 12.5px; font-weight: 400; }
+@media (max-width: 767px) { .message__person { justify-content: flex-start; } }
+
+/* =========================================================
+   ご利用の流れ（Zoff 採用情報カード）
+   ========================================================= */
+.process__layout { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: clamp(32px, 4vw, 64px); align-items: start; }
+.process__list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+.step { display: flex; flex-direction: column; padding-top: 18px; padding-left: 16px; padding-right: 16px; padding-bottom: 20px; border-radius: var(--radius-s); background: var(--color-white); }
+.step__num { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 12px; font-weight: 500; color: var(--color-sky-700); line-height: 1; }
+.step__title { margin-top: 10px; font-size: 16px; font-weight: 700; line-height: 1.5; }
+.step__img { margin-top: 14px; aspect-ratio: 4 / 3; }
+.step__img .ph::after { font-size: 9px; }
+.step__text { margin-top: 14px; font-size: 13px; line-height: 1.75; color: var(--text-secondary); }
+@media (max-width: 1199px) {
+  .process__layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 767px) {
+  .process__list { grid-template-columns: 1fr; }
+  .step { display: grid; grid-template-columns: 96px minmax(0, 1fr); column-gap: 16px; }
+  .step__img { grid-column: 1; grid-row: 1 / span 3; margin-top: 0; }
+  .step__num, .step__title, .step__text { grid-column: 2; }
+  .step__text { margin-top: 6px; }
+}
+
+/* =========================================================
+   料金（TimeRex プラン列 ＋ EMS クリーム色の面）
+   ========================================================= */
+.pricing__panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 80px); align-items: start; padding-top: clamp(40px, 4.4vw, 72px); padding-left: clamp(22px, 4.4vw, 72px); padding-right: clamp(22px, 4.4vw, 72px); padding-bottom: clamp(40px, 4.4vw, 72px); border-radius: var(--radius); background: var(--color-cream); }
+.plan { padding-top: 22px; padding-left: 22px; padding-right: 22px; padding-bottom: 26px; border-radius: 8px; background: var(--color-white); }
+.plan__name { padding-top: 8px; padding-bottom: 8px; border-radius: 8px; background: var(--color-sky-700); color: var(--text-inverse); font-size: 17px; font-weight: 700; text-align: center; }
+.plan__price { padding-top: 26px; padding-bottom: 22px; text-align: center; }
+.plan__amount { display: flex; align-items: baseline; justify-content: center; gap: 6px; color: var(--color-sky-700); }
+.plan__from { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 13px; letter-spacing: .06em; }
+.plan__num { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: clamp(54px, 5vw, 76px); font-weight: 500; line-height: 1; }
+.plan__unit { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+.plan__tilde { font-size: 20px; color: var(--text-primary); }
+.plan__note { margin-top: 14px; font-size: 12px; line-height: 1.7; color: var(--text-secondary); text-align: left; }
+.plan__list li { position: relative; display: flex; align-items: center; min-height: 48px; padding-left: 40px; padding-right: 12px; font-size: 14px; line-height: 1.5; }
+.plan__list li:nth-child(odd) { background: #F2F7F8; }
+.plan__list li::before { content: ""; position: absolute; left: 14px; top: 50%; width: 16px; height: 16px; margin-top: -8px; border-radius: 50%; background: var(--color-sky-700); }
+.plan__list li::after { content: ""; position: absolute; left: 18.5px; top: 50%; width: 7px; height: 4px; margin-top: -3px; border-left: 1.6px solid #fff; border-bottom: 1.6px solid #fff; transform: rotate(-45deg); }
+.plan__list li.-opt { color: var(--text-secondary); }
+.plan__list li.-opt::before { background: var(--color-sky-300); }
+.plan__cta { margin-top: 24px; }
+.plan__cta .btn { width: 100%; }
+@media (max-width: 1023px) { .pricing__panel { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   FAQ（TimeRex 表の縞＋EMS の矢印ボタン）
+   ========================================================= */
+.faq__list { max-width: 960px; margin-top: var(--space-head); margin-left: auto; margin-right: auto; border-radius: var(--radius); overflow: hidden; background: var(--color-white); }
+.qa + .qa { border-top: 1px solid var(--color-line); }
+.qa__q { display: flex; align-items: center; gap: 16px; padding-top: 20px; padding-bottom: 20px; padding-left: clamp(18px, 2vw, 30px); padding-right: clamp(18px, 2vw, 30px); cursor: pointer; list-style: none; font-weight: 700; font-size: 15.5px; line-height: 1.6; }
+.qa__q::-webkit-details-marker { display: none; }
+.qa__mark { flex: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 7px; background: var(--color-sky-700); color: var(--text-inverse); font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 13px; font-weight: 500; }
+.qa__mark.-a { background: var(--color-sky-100); color: var(--color-sky-700); }
+.qa__text { flex: 1; }
+.qa__toggle { position: relative; flex: none; width: 36px; height: 36px; border-radius: 8px; background: var(--color-sky-100); transition: background-color .3s ease; }
+.qa__toggle::before { content: ""; position: absolute; inset: 0; margin: auto; width: 10px; height: 10px; background: var(--color-sky-700);
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M9.5 3.5 5 8 .5 3.5l1-1L5 6l3.5-3.5z"/></svg>') center / contain no-repeat;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M9.5 3.5 5 8 .5 3.5l1-1L5 6l3.5-3.5z"/></svg>') center / contain no-repeat;
+  transition: transform .35s var(--ease-out); }
+.qa[open] .qa__toggle::before { transform: rotate(180deg); }
+.qa[open] .qa__q { background: #F2F7F8; }
+.qa__a { display: flex; gap: 16px; padding-top: 18px; padding-bottom: 24px; padding-left: clamp(18px, 2vw, 30px); padding-right: calc(clamp(18px, 2vw, 30px) + 52px); background: #F2F7F8; }
+.qa__a p { padding-top: 2px; line-height: 1.95; color: var(--text-secondary); }
+@media (hover: hover) { .qa__q:hover .qa__toggle { background: var(--color-sky-300); } }
+@media (max-width: 767px) { .qa__a { padding-right: 18px; } .qa__q { font-size: 14.5px; } }
+.assure { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 960px; margin-top: 40px; margin-left: auto; margin-right: auto; }
+.assure__item { padding-top: 12px; padding-bottom: 12px; padding-left: 16px; padding-right: 16px; border: 1px solid var(--color-sky-700); border-radius: 999px; background: var(--color-white); text-align: center; line-height: 1.45; }
+.assure__item strong { display: block; color: var(--color-sky-700); font-size: 14.5px; }
+.assure__item span { display: block; font-size: 11.5px; color: var(--text-secondary); }
+@media (max-width: 1023px) { .assure { grid-template-columns: repeat(2, minmax(0, 1fr)); } .assure__item { border-radius: 16px; } }
+
+/* =========================================================
+   お問い合わせ
+   ========================================================= */
+.contact { padding-bottom: 0; }
+.contact__grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 4.6vw, 80px); align-items: start; }
+.contact__title { margin-top: 18px; font-size: var(--fz-h2); font-weight: 500; line-height: 1.5; }
+.contact .head__en { color: var(--text-primary); }
+.contact__badge { display: inline-block; margin-top: 18px; padding-top: 5px; padding-bottom: 5px; padding-left: 14px; padding-right: 14px; border-radius: 999px; background: var(--color-white); font-size: 13px; font-weight: 700; color: var(--color-sky-700); }
+.contact__desc { margin-top: 20px; line-height: 1.95; }
+.contact__tel { margin-top: 28px; padding-top: 20px; padding-left: 24px; padding-right: 24px; padding-bottom: 20px; border-radius: var(--radius); background: rgba(255, 255, 255, .55); }
+.contact__tel-label { font-size: 13px; font-weight: 700; }
+.contact__tel-num { display: inline-block; margin-top: 4px; font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: clamp(28px, 2.6vw, 36px); font-weight: 500; text-decoration: none; letter-spacing: .02em; line-height: 1.3; }
+.contact__tel-hours { margin-top: 4px; font-size: 12.5px; color: var(--text-secondary); }
+.contact .chips .chip { border-color: transparent; }
+.form-card { padding-top: clamp(28px, 3vw, 44px); padding-left: clamp(20px, 3vw, 44px); padding-right: clamp(20px, 3vw, 44px); padding-bottom: clamp(28px, 3vw, 44px); border-radius: var(--radius); background: var(--color-white); }
+.form__title { margin-top: 12px; font-size: clamp(19px, 1.6vw, 23px); font-weight: 700; line-height: 1.5; }
+.form__lead { margin-top: 12px; font-size: 13.5px; line-height: 1.8; color: var(--text-secondary); }
+.form__notice { margin-top: 16px; padding-top: 12px; padding-bottom: 12px; padding-left: 16px; padding-right: 16px; border-left: 3px solid var(--color-accent); border-radius: 0 6px 6px 0; background: var(--color-base); font-size: 13px; line-height: 1.7; }
+.form__row { margin-top: 20px; }
+.form__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; }
+.form__label { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; }
+.form__req, .form__opt { padding-top: 1px; padding-bottom: 2px; padding-left: 7px; padding-right: 7px; border-radius: 4px; font-size: 11px; font-weight: 700; line-height: 1.5; }
+.form__req { background: var(--color-sky-700); color: var(--text-inverse); }
+.form__opt { background: var(--color-sky-100); color: var(--text-secondary); }
+.form__input { display: block; width: 100%; margin-top: 8px; padding-top: 12px; padding-bottom: 12px; padding-left: 14px; padding-right: 14px; border: 1px solid var(--color-line); border-radius: 8px; background: #F7FAFA; color: var(--text-primary); font: inherit; font-size: 16px; line-height: 1.5; transition: border-color .25s ease, background-color .25s ease; }
+.form__input::placeholder { color: #8796A0; }
+.form__input:focus { outline: none; border-color: var(--color-sky-700); background: var(--color-white); }
+.form__input.-select { -webkit-appearance: none; appearance: none; padding-right: 38px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path fill="%231A78AE" d="M9.5 3.5 5 8 .5 3.5l1-1L5 6l3.5-3.5z"/></svg>'); background-repeat: no-repeat; background-position: right 14px center; background-size: 10px; }
+.form__input.-textarea { resize: vertical; min-height: 120px; }
+.form__agree { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.7; cursor: pointer; }
+.form__agree input { flex: none; width: 18px; height: 18px; margin-top: 3px; accent-color: var(--color-sky-700); }
+.form__agree a { color: var(--color-sky-700); }
+.form__error { display: none; margin-top: 6px; font-size: 12.5px; color: #B3261E; }
+.form__row.is-error .form__error { display: block; }
+.form__row.is-error .form__input { border-color: #B3261E; }
+.form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form__submit { margin-top: 28px; }
+.form__after { margin-top: 10px; text-align: center; font-size: 12.5px; color: var(--text-secondary); }
+.form__done { text-align: center; padding-top: 40px; padding-bottom: 40px; }
+.form__done-title { font-size: 20px; font-weight: 700; color: var(--color-sky-700); }
+.form__done p + p { margin-top: 12px; }
+.form__done-note { font-size: 12.5px; color: var(--text-secondary); }
+@media (max-width: 1023px) { .contact__grid { grid-template-columns: 1fr; } }
+@media (max-width: 767px) { .form__cols { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   フッター（EMS フッター：濃色を水色に）
+   ========================================================= */
+.footer { position: relative; z-index: 2; margin-top: var(--space-section); background: var(--color-sky-300); color: var(--text-primary); }
+.footer__inner { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, .9fr); gap: clamp(32px, 4vw, 64px); max-width: calc(var(--max) + var(--gutter) * 2); margin-left: auto; margin-right: auto; padding-top: clamp(64px, 6vw, 96px); padding-left: var(--gutter); padding-right: var(--gutter); }
+.footer__logo { width: 150px; }
+.footer__name { margin-top: 20px; font-weight: 700; }
+.footer__tagline { margin-top: 6px; font-size: 13.5px; }
+.footer__desc { margin-top: 14px; font-size: 13px; line-height: 1.85; }
+.footer__head { font-family: "Zalando Sans SemiExpanded", sans-serif; font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--text-primary); }
+.footer__office, .footer__company { margin-top: 14px; font-size: 13px; line-height: 1.85; }
+.footer__office dt { font-weight: 700; }
+.footer__office dd + dt { margin-top: 12px; }
+.footer__bottom { display: flex; justify-content: space-between; gap: 16px; max-width: calc(var(--max) + var(--gutter) * 2); margin-left: auto; margin-right: auto; margin-top: clamp(48px, 4.6vw, 72px); padding-top: 20px; padding-left: var(--gutter); padding-right: var(--gutter); padding-bottom: 28px; border-top: 1px solid rgba(31, 49, 64, .15); font-size: 12px; }
+.footer__bottom a { text-decoration: none; }
+@media (max-width: 1023px) { .footer__inner { grid-template-columns: 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
+@media (max-width: 767px) { .footer__inner { grid-template-columns: 1fr; } .footer__bottom { flex-direction: column; padding-bottom: 96px; } }
+
+/* スマホ下部の固定ボタン（EMS の2ボタンCTAを縮小） */
+.spbar { display: none; }
+@media (max-width: 767px) {
+  .spbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6px; padding-top: 8px; padding-left: 8px; padding-right: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom)); background: rgba(232, 244, 241, .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); transform: translateY(110%); transition: transform .4s var(--ease-out); }
+  .spbar.is-show { transform: none; }
+  .spbar__btn { display: flex; align-items: center; justify-content: center; height: 50px; border-radius: 9px; text-decoration: none; font-weight: 700; font-size: 14.5px; }
+  .spbar__btn.-tel { background: var(--color-white); color: var(--text-primary); }
+  .spbar__btn.-cta { background: var(--color-sky-700); color: var(--text-inverse); }
+}
+
+/* スマホだけの改行 */
+.sp-br { display: none; }
+@media (max-width: 767px) {
+  .sp-br { display: inline; }
+  :root { --fz-h2: 24px; }
+  .cmp__corner { width: 120px; }
+  .cmp__table { min-width: 700px; }
+  .cmp__table tbody th { font-size: 12.5px; }
+  .case__metric strong { font-size: 17px; white-space: nowrap; }
+  .case__metric { padding-left: 12px; }
+}
+
+/* 動きを減らす設定 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .js-fade { opacity: 1; transform: none; transition: none; }
+  .strip__track { animation: none; }
+  .kv__slide { transition: none; }
+  .bgfx__obj { transform: none !important; }
+}
+
+/* 差し替えた画像 */
+.img-fill { display: block; width: 100%; height: 100%; object-fit: cover; }
+.img-fill.-contain { object-fit: contain; }
+.img-fill.-market03 { object-position: 28% 50%; }
+.reasons__kv > .img-fill { position: absolute; inset: 0; }
+.numtile__ill .img-fill { border-radius: 0; }
+.step__img .img-fill { background: var(--color-white); }
